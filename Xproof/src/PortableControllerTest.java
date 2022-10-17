@@ -3,30 +3,61 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 class PortableControllerTest {
-
+	
+	
+	
+	//AddList
 	@Test
-	void testAddToList() {
-		fail("Not yet implemented");
+	void testAddList_notfound() {
+		PortableController PC = new PortableController();
+		boolean res_XP1 = PC.AddList("ObraPublica");
+		assertEquals(true, res_XP1);
+		assertEquals(true, PC.ListMap.containsKey("ObraPublica"));
 	}
-
+	
 	@Test
-	void testRemoveFromList() {
-		fail("Not yet implemented");
+	void testAddList_found() {
+		PortableController PC = new PortableController();
+		boolean res_XP1 = PC.AddList("ObraPublica");
+		assertEquals(false, res_XP1);
+		assertEquals(true, PC.ListMap.containsKey("ObraPublica"));
 	}
-
+	
+	
+	
+	
+	
+	
+	//RemoveList
 	@Test
-	void testCheckListNameFromDatabase() {
-		fail("Not yet implemented");
+	void testRemoveList_found() {
+		PortableController PC = new PortableController();
+		
+		assertEquals(true, PC.ListMap.containsKey("ObraPublica"));
+		boolean res_XP1 = PC.RemoveList("ObraPublica");
+		assertEquals(true, res_XP1);
+		assertEquals(false, PC.ListMap.containsKey("ObraPublica"));
 	}
-
+	
 	@Test
-	void testAddList() {
-		fail("Not yet implemented");
+	void testRemoveList_notfound() {
+		PortableController PC = new PortableController();
+		
+		assertEquals(true, PC.ListMap.containsKey("ObraPublica"));
+		boolean res_XP1 = PC.RemoveList("ObraPublica");
+		assertEquals(false, res_XP1);
+		assertEquals(false, PC.ListMap.containsKey("ObraPublica"));
 	}
-
-	@Test
-	void testRemoveList() {
-		fail("Not yet implemented");
-	}
-
+	
+	
+	
+	
+	
+	
+	//CheckListNameFromDatabase
+	
+	//AddToList
+	
+	//RemoveFromList
+	
 }
