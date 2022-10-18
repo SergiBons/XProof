@@ -3,13 +3,34 @@ import java.util.HashMap;
 public class PortableController {
 
 	
-	HashMap<String, int[]> ListMap = new HashMap<String, int[]>();
+	HashMap<String, int[]> ListMap;
 	
+	public PortableController() {
+		ListMap = new HashMap<String, int[]>();
+		
+	}
 	
+	public PortableController(String ListName)
+	{
 
+		
+	}
+	
+	public PortableController(String List, int[] CodeList)
+	{
+		
+		
+		
+		
+	}
+	
+	public PortableController(String[] listOLists, int[][] ListOCodeList) {
+
+	}
+	
 	
 	//Funcions principals
-	
+
 	public boolean AddToList(String list, int[] CodeList){
 		
 		

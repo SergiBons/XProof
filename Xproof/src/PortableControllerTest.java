@@ -6,14 +6,29 @@ class PortableControllerTest {
 	
 	//Constructors
 	void testConstructors() {
+		//Constr per defecte
 		PortableController PC = new PortableController();
 		assertNotNull(PC.ListMap);
+		
+		//Constr amb nom de llista
 		PortableController PC1 = new PortableController("ObraPublica");
 		assertEquals(true, PC1.ListMap.containsKey("ObraPublica"));
-		int[] aux = {2,2};
+		
+		//Constr amb nom de llista i codis
+		int[] aux = {0,0};
 		PortableController PC2 = new PortableController("ObraPublica", aux );
-		assertEquals(true, PC1.ListMap.containsKey("ObraPublica"));
-		assertEquals(aux, PC1.ListMap.get("ObraPublica"));
+		assertEquals(true, PC2.ListMap.containsKey("ObraPublica"));
+		assertEquals(aux, PC2.ListMap.get("ObraPublica"));
+		
+		//Constr amb LLista de LListes I Llista de Codis
+		int[] aux1 = {1,1};
+		int[][] auxList = {aux,aux1};
+		String[] ListOLists = {"ObraPublica","Assistencia C Generalitat"};
+		PortableController PC3 = new PortableController(ListOLists, auxList );
+		assertEquals(true, PC3.ListMap.containsKey("ObraPublica"));
+		assertEquals(true, PC3.ListMap.containsKey("Assistencia C Generalitat"));
+		assertEquals(aux, PC3.ListMap.get("ObraPublica"));
+		assertEquals(aux1, PC3.ListMap.get("Assistencia C Generalitat"));
 		
 	}
 	
