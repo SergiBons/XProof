@@ -4,6 +4,18 @@ import org.junit.jupiter.api.Test;
 
 class PortableControllerTest {
 	
+	//Constructors
+	void testConstructors() {
+		PortableController PC = new PortableController();
+		assertNotNull(PC.ListMap);
+		PortableController PC1 = new PortableController("ObraPublica");
+		assertEquals(true, PC1.ListMap.containsKey("ObraPublica"));
+		int[] aux = {2,2};
+		PortableController PC2 = new PortableController("ObraPublica", aux );
+		assertEquals(true, PC1.ListMap.containsKey("ObraPublica"));
+		assertEquals(aux, PC1.ListMap.get("ObraPublica"));
+		
+	}
 	
 	//SumaCodis
 	void testSumaCodis() {
