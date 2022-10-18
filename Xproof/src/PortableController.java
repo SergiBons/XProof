@@ -54,9 +54,19 @@ public class PortableController {
 		return true;
 	}
 	
+	public boolean SumaCodis(String list, int[] codis ) {
+		
+		
+		
+		return true;
+	}
 	
-	
-	
+	public boolean RestaCodis(String list, int[] codis ) {
+		
+		
+		
+		return true;
+	}
 	
 	
 }
