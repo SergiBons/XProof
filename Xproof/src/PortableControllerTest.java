@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 class PortableControllerTest {
 	
 	//Constructors
+	@Test
 	void testConstructors() {
 		//Constr per defecte
 		PortableController PC = new PortableController();
@@ -33,6 +34,7 @@ class PortableControllerTest {
 	}
 	
 	//SumaCodis
+	@Test
 	void testSumaCodis() {
 		//Suma codis a una llista
 		PortableController PC = new PortableController();
@@ -45,6 +47,7 @@ class PortableControllerTest {
 	
 	
 	//RestaCodis
+	@Test
 	void testRestaCodis() {
 		//Resta codis d'una llista, pero no la buida
 		

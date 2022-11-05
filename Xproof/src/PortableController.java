@@ -12,20 +12,29 @@ public class PortableController {
 	
 	public PortableController(String ListName)
 	{
-		 
+		ListMap = new HashMap<String, int[]>();
+		ListMap.put(ListName, null);
 		
 	}
 	
-	public PortableController(String List, int[] CodeList)
+	public PortableController(String ListName, int[] CodeList)
 	{
-		
-		
+		ListMap = new HashMap<String, int[]>();
+		ListMap.put(ListName, CodeList);
 		
 		
 	}
 	
-	public PortableController(String[] listOLists, int[][] ListOCodeList) {
-
+	public PortableController(String[] ListOLists, int[][] ListOCodeList) {
+		ListMap = new HashMap<String, int[]>();
+		for(int i = 0; i < ListOLists.length; i++) 
+		{
+			ListMap.put(ListOLists[i], ListOCodeList[i]);
+		}
+		
+		
+		
+		
 	}
 	
 	
