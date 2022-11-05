@@ -5,8 +5,18 @@ import org.junit.jupiter.api.Test;
 class ModelDBTest {
 
 	@Test
-	void test() {
+	void testCheckListName() {
 		fail("Not yet implemented");
 	}
 
+	@Test
+	void testDeleteCodes() {
+		fail("Not yet implemented");
+	}
+	
+	@Test
+	void testAddCodes() {
+		fail("Not yet implemented");
+	}
+	
 }
