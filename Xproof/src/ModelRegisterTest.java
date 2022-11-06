@@ -38,11 +38,11 @@ class ModelRegisterTest {
 	@Test
 	void testCheckPasswdRestrictions() {
 		ModelRegister Reg = new ModelRegister("User1","PASSWD1");
-		assertEquals(Reg.CheckNameRestrictions(),"CORRECT");
+		assertEquals(Reg.CheckPasswdRestrictions(),"CORRECT");
 		
 		
 		ModelRegister Reg1 = new ModelRegister("User1","1");
-		assertEquals(Reg1.CheckNameRestrictions(),"PASSWD TOO SHORT");
+		assertEquals(Reg1.CheckPasswdRestrictions(),"PASSWD TOO SHORT");
 		
 		}
 	

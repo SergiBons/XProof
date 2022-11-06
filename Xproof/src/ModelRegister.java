@@ -18,15 +18,15 @@ String UPasswd;
 	}
 	
 	public String CheckNameRestrictions() {
-
 		
+
 		return "CORRECT";
 	}
 	
 	
 	public String CheckPasswdRestrictions() {
-
 		
+
 		return "CORRECT";
 	}
 	
