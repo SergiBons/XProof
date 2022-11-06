@@ -49,9 +49,10 @@ class ModelRegisterTest {
 	@Test
 	void testRegisterNewUser() {
 		ModelRegister Reg = new ModelRegister("User10","PASSWD10");
-		Reg.RegisterNewUser();
+		String CE = Reg.RegisterNewUser();
 		File f = new File("C:\\Users\\Usuario\\eclipse-workspace\\Xproof\\Materials\\BD\\Users\\"+Reg.UName+".txt");
 		assertEquals(true, f.exists());
+		assertEquals("CORRECT", CE);
 		f.delete();
 		}
 	

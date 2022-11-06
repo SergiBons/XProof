@@ -36,7 +36,19 @@ String UPasswd;
 	}
 	
 	
-	public void RegisterNewUser() {
+	public String RegisterNewUser() {
+		String CE = "Initialization";
+		
+		return CE;
+		
+	}
+
+			
+		
+		
+		
+		
+		
 		
 	}
 }
