@@ -25,6 +25,25 @@ class ModelRegisterTest {
 	void testCheckNameRestrictions() {
 		ModelRegister Reg = new ModelRegister("User1","PASSWD1");
 		assertEquals(Reg.CheckNameRestrictions(),"CORRECT");
+		
+		
+		ModelRegister Reg1 = new ModelRegister("U","PASSWD1");
+		assertEquals(Reg1.CheckNameRestrictions(),"NAME TOO SHORT");
+		
+		ModelRegister Reg2 = new ModelRegister("ThisNameIsClearlyTooLongForAUsernameAndWeCanAllAgreeOnThat","PASSWD1");
+		assertEquals(Reg2.CheckNameRestrictions(),"NAME TOO LONG");
+		
+		}
+	
+	@Test
+	void testCheckPasswdRestrictions() {
+		ModelRegister Reg = new ModelRegister("User1","PASSWD1");
+		assertEquals(Reg.CheckNameRestrictions(),"CORRECT");
+		
+		
+		ModelRegister Reg1 = new ModelRegister("User1","1");
+		assertEquals(Reg1.CheckNameRestrictions(),"PASSWD TOO SHORT");
+		
 		}
 	
 	@Test

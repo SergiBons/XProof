@@ -10,17 +10,23 @@ String UPasswd;
 		  }
 	
 	public boolean CheckIfNameAlreadyExists() {
-		
-		
-		return false;
+		File f = new File("C:\\Users\\Usuario\\eclipse-workspace\\Xproof\\Materials\\BD\\Users\\"+UName+".txt");
+		if (f.exists())
+			return true;
+		else
+			return false;
 	}
 	
 	public String CheckNameRestrictions() {
+
+		
+		return "CORRECT";
+	}
 	
 	
-	
-	
-	
+	public String CheckPasswdRestrictions() {
+
+		
 		return "CORRECT";
 	}
 	
