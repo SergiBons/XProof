@@ -1,6 +1,8 @@
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 import org.junit.jupiter.api.Test;
 
@@ -51,8 +53,20 @@ class ModelRegisterTest {
 		ModelRegister Reg = new ModelRegister("User10","PASSWD10");
 		String CE = Reg.RegisterNewUser();
 		File f = new File("C:\\Users\\Usuario\\eclipse-workspace\\Xproof\\Materials\\BD\\Users\\"+Reg.UName+".txt");
+		
 		assertEquals(true, f.exists());
 		assertEquals("CORRECT", CE);
+		try {
+			Scanner R = new Scanner(f);
+			if (R.hasNextLine()) {
+				String data = R.nextLine();
+				assertEquals(data,"PASSWD10");
+				}
+			}
+		catch(FileNotFoundException e) {
+			System.out.println("Error amb el fitxer");
+		}
+		
 		f.delete();
 		}
 	
