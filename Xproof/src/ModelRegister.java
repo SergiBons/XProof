@@ -40,15 +40,6 @@ String UPasswd;
 		String CE = "Initialization";
 		
 		return CE;
-		
-	}
 
-			
-		
-		
-		
-		
-		
-		
 	}
 }
