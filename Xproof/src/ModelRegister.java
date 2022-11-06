@@ -18,17 +18,23 @@ String UPasswd;
 	}
 	
 	public String CheckNameRestrictions() {
-		
-
-		return "CORRECT";
+		if (UName.length() > 1)
+			if (UName.length() < 20)
+				return "CORRECT";
+			else
+				return "NAME TOO LONG";
+		else 
+			return "NAME TOO SHORT";
 	}
 	
 	
 	public String CheckPasswdRestrictions() {
-		
-
-		return "CORRECT";
+		if (UPasswd.length() > 5)
+			return "CORRECT";
+		else 
+			return "PASSWD TOO SHORT";
 	}
+	
 	
 	public void RegisterNewUser() {
 		
