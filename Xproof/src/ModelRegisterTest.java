@@ -58,10 +58,8 @@ class ModelRegisterTest {
 		assertEquals("CORRECT", CE);
 		try {
 			Scanner R = new Scanner(f);
-			if (R.hasNextLine()) {
-				String data = R.nextLine();
-				assertEquals(data,"PASSWD10");
-				}
+			String data = R.nextLine();
+			assertEquals(data,"PASSWD10");
 			}
 		catch(FileNotFoundException e) {
 			System.out.println("Error amb el fitxer");
@@ -69,6 +67,20 @@ class ModelRegisterTest {
 		
 		f.delete();
 		}
+	@Test
+	void testDeleteRegisteredUser() {
+		ModelRegister Reg = new ModelRegister("User10","PASSWD10");
+		boolean CE = Reg.DeleteRegisteredUser();
+		File f = new File("C:\\Users\\Usuario\\eclipse-workspace\\Xproof\\Materials\\BD\\Users\\"+Reg.UName+".txt");
+		assertEquals(false, f.exists());
+		assertEquals(true, CE);
+		
+		ModelRegister Reg1 = new ModelRegister("User15","PASSWD15");
+		boolean CE1 = Reg1.DeleteRegisteredUser();
+		File f1 = new File("C:\\Users\\Usuario\\eclipse-workspace\\Xproof\\Materials\\BD\\Users\\"+Reg1.UName+".txt");
+		assertEquals(false, f1.exists());
+		assertEquals(false, CE1);
+	}
 	
 	
 }
