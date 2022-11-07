@@ -46,7 +46,7 @@ String UPasswd;
 		f.createNewFile();
 	    }
 	    catch(IOException e) {
-	    	CE = "FILFE ALREADY EXISTS";
+	    	CE = "CAN NOT CREATE FILE";
 	    }
 	    try {
 	        FileWriter myWriter = new FileWriter("C:\\Users\\Usuario\\eclipse-workspace\\Xproof\\Materials\\BD\\Users\\"+UName+".txt");

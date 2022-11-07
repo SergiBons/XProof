@@ -67,6 +67,7 @@ class ModelRegisterTest {
 			System.out.println("Error amb el fitxer");
 		}
 		Reg.DeleteRegisteredUser();
+	
 		}
 	@Test
 	void testDeleteRegisteredUser() {
