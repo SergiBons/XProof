@@ -51,6 +51,7 @@ class ModelRegisterTest {
 	@Test
 	void testRegisterNewUser() {
 		ModelRegister Reg = new ModelRegister("User10","PASSWD10");
+		Reg.DeleteRegisteredUser();
 		String CE = Reg.RegisterNewUser();
 		File f = new File("C:\\Users\\Usuario\\eclipse-workspace\\Xproof\\Materials\\BD\\Users\\"+Reg.UName+".txt");
 		
@@ -65,10 +66,12 @@ class ModelRegisterTest {
 		catch(FileNotFoundException e) {
 			System.out.println("Error amb el fitxer");
 		}
+		Reg.DeleteRegisteredUser();
 		}
 	@Test
 	void testDeleteRegisteredUser() {
 		ModelRegister Reg = new ModelRegister("User10","PASSWD10");
+		Reg.RegisterNewUser();
 		boolean CE = Reg.DeleteRegisteredUser();
 		File f = new File("C:\\Users\\Usuario\\eclipse-workspace\\Xproof\\Materials\\BD\\Users\\"+Reg.UName+".txt");
 		assertEquals(false, f.exists());
