@@ -57,15 +57,14 @@ class ModelRegisterTest {
 		assertEquals(true, f.exists());
 		assertEquals("CORRECT", CE);
 		try {
-			Scanner R = new Scanner(f);
-			String data = R.nextLine();
+			Scanner S = new Scanner(f);
+			String data = S.nextLine();
+			S.close();
 			assertEquals(data,"PASSWD10");
 			}
 		catch(FileNotFoundException e) {
 			System.out.println("Error amb el fitxer");
 		}
-		
-		f.delete();
 		}
 	@Test
 	void testDeleteRegisteredUser() {

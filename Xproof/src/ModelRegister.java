@@ -41,9 +41,9 @@ String UPasswd;
 	
 	public String RegisterNewUser() {
 		String CE = "CORRECT";
-		File myObj = new File("C:\\Users\\Usuario\\eclipse-workspace\\Xproof\\Materials\\BD\\Users\\"+UName+".txt");
+		File f = new File("C:\\Users\\Usuario\\eclipse-workspace\\Xproof\\Materials\\BD\\Users\\"+UName+".txt");
 	    try {
-		myObj.createNewFile();
+		f.createNewFile();
 	    }
 	    catch(IOException e) {
 	    	CE = "FILFE ALREADY EXISTS";
@@ -60,8 +60,15 @@ String UPasswd;
 	}
 	
 	public Boolean DeleteRegisteredUser() {
-		
-		return true;
+		File f = new File("C:\\Users\\Usuario\\eclipse-workspace\\Xproof\\Materials\\BD\\Users\\"+UName+".txt");
+		if (f.exists()) {
+			System.gc();
+			if (f.delete())
+				return true;
+			else
+				return false;
+		}
+		return false;
 	}
 	
 }
