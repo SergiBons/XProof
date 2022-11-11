@@ -22,7 +22,8 @@ class ModelRegisterTest {
 		ModelRegister Reg1 = new ModelRegister("User10","PASSWD10");
 		assertEquals(Reg1.CheckIfNameAlreadyExists(),false);
 		}
-	
+	//Checks if name is correct
+	//(Max Size(19) and Min size(2))
 	@Test
 	void testCheckNameRestrictions() {
 		ModelRegister Reg = new ModelRegister("User1","PASSWD1");
@@ -36,7 +37,8 @@ class ModelRegisterTest {
 		assertEquals(Reg2.CheckNameRestrictions(),"NAME TOO LONG");
 		
 		}
-	
+	//Checks if password is correct
+	//and Min size(5)
 	@Test
 	void testCheckPasswdRestrictions() {
 		ModelRegister Reg = new ModelRegister("User1","PASSWD1");
@@ -47,7 +49,8 @@ class ModelRegisterTest {
 		assertEquals(Reg1.CheckPasswdRestrictions(),"PASSWD TOO SHORT");
 		
 		}
-	
+	//Creates new file associated with user info in DB
+	//returns error value, if error found, else returns "CORRECT"
 	@Test
 	void testRegisterNewUser() {
 		ModelRegister Reg = new ModelRegister("User10","PASSWD10");
@@ -66,9 +69,12 @@ class ModelRegisterTest {
 		catch(FileNotFoundException e) {
 			System.out.println("Error amb el fitxer");
 		}
+		
 		Reg.DeleteRegisteredUser();
 	
 		}
+	//Deletes file associated with user info in DB
+	//returns error value, if error found, else returns "CORRECT"
 	@Test
 	void testDeleteRegisteredUser() {
 		ModelRegister Reg = new ModelRegister("User10","PASSWD10");

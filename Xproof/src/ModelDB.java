@@ -9,8 +9,7 @@ public class ModelDB {
 	
 	public ModelDB(String UserName, String UserPasswd) {
 		UName = UserName;
-		UPasswd = UserPasswd;
-	}
+		UPasswd = UserPasswd;	}
 	
 	public boolean CheckListName(String ListName){
 
@@ -39,3 +38,6 @@ public class ModelDB {
 	}
 	
 }
+
+
+
