@@ -32,16 +32,19 @@ class PortableControllerTest {
 		assertEquals(aux1, PC3.ListMap.get("Lista2"));
 		
 	}
+	@Test
 	void testLogin() {
 		//Correct Login
 		PortableController PC = new PortableController();
-		PC.Login("User1", "PASSWD1");
+		boolean CE = PC.Login("User1", "PASSWD1");
+		assertEquals(CE, true);
 		assertEquals(PC.DB.UName, "User1");
 		assertEquals(PC.DB.UPasswd, "PASSWD1");
 
 		//Wrong Login
 		PC = new PortableController();
-		PC.Login("User100", "PASSWD1");
+		CE = PC.Login("User100", "PASSWD1");
+		assertEquals(CE, false);
 		assertEquals(PC.DB.UName, "unlogged");
 		assertEquals(PC.DB.UPasswd, "unlogged");
 	}
@@ -121,7 +124,7 @@ class PortableControllerTest {
 	@Test
 	void testRemoveList() {
 		//Esborra una llista existent
-		PortableController PC = new PortableController();
+		PortableController PC = new PortableController("Lista1");
 		PC.Login("User1", "PASSWD1");
 		
 		assertEquals(true, PC.ListMap.containsKey("Lista1"));
@@ -150,6 +153,7 @@ class PortableControllerTest {
 	}
 	
 	//CheckCodesExist
+	@Test
 	void testCheckCodesExist() {
 		PortableController PC = new PortableController();
 		PC.Login("User1","PASSWD1");
@@ -158,7 +162,8 @@ class PortableControllerTest {
 		PC.DB.AddCodes(auxList);
 		assertEquals(PC.CheckCodesExist("List1", auxList) , true);
 	}
-		
+	
+	@Test	
 	void testCheckUserHasCodes() {
 		//user has codes
 		String[] aux = {"01001","01002"};
