@@ -74,7 +74,7 @@ class ModelRegisterTest {
 	
 		}
 	//Deletes file associated with user info in DB
-	//returns error value, if error found, else returns "CORRECT"
+	//returns error value, if error found, else returns true
 	@Test
 	void testDeleteRegisteredUser() {
 		ModelRegister Reg = new ModelRegister("User10","PASSWD10");

@@ -66,6 +66,7 @@ String UPasswd;
 			if (f.delete())
 				return true;
 			else
+				//not permission to delete file
 				return false;
 		}
 		return false;

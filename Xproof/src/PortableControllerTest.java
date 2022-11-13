@@ -12,24 +12,24 @@ class PortableControllerTest {
 		assertNotNull(PC.ListMap);
 		
 		//Constr amb nom de llista
-		PortableController PC1 = new PortableController("ObraPublica");
-		assertEquals(true, PC1.ListMap.containsKey("ObraPublica"));
+		PortableController PC1 = new PortableController("Lista1");
+		assertEquals(true, PC1.ListMap.containsKey("Lista1"));
 		
 		//Constr amb nom de llista i codis
 		int[] aux = {0,0};
-		PortableController PC2 = new PortableController("ObraPublica", aux );
-		assertEquals(true, PC2.ListMap.containsKey("ObraPublica"));
-		assertEquals(aux, PC2.ListMap.get("ObraPublica"));
+		PortableController PC2 = new PortableController("Lista1", aux );
+		assertEquals(true, PC2.ListMap.containsKey("Lista1"));
+		assertEquals(aux, PC2.ListMap.get("Lista1"));
 		
 		//Constr amb LLista de LListes I Llista de Codis
 		int[] aux1 = {1,1};
 		int[][] auxList = {aux,aux1};
-		String[] ListOLists = {"ObraPublica","Assistencia C Generalitat"};
+		String[] ListOLists = {"Lista1","Lista2"};
 		PortableController PC3 = new PortableController(ListOLists, auxList );
-		assertEquals(true, PC3.ListMap.containsKey("ObraPublica"));
-		assertEquals(true, PC3.ListMap.containsKey("Assistencia C Generalitat"));
-		assertEquals(aux, PC3.ListMap.get("ObraPublica"));
-		assertEquals(aux1, PC3.ListMap.get("Assistencia C Generalitat"));
+		assertEquals(true, PC3.ListMap.containsKey("Lista1"));
+		assertEquals(true, PC3.ListMap.containsKey("Lista2"));
+		assertEquals(aux, PC3.ListMap.get("Lista1"));
+		assertEquals(aux1, PC3.ListMap.get("Lista2"));
 		
 	}
 	
@@ -39,9 +39,9 @@ class PortableControllerTest {
 		//Suma codis a una llista
 		PortableController PC = new PortableController();
 		int[] testArr = {0010001,0010002};
-		boolean res_SC1 = PC.SumaCodis("ObraPublica", testArr);
+		boolean res_SC1 = PC.SumaCodis("Lista1", testArr);
 		assertEquals(true, res_SC1);
-		assertEquals(2,PC.ListMap.get("ObraPublica").length);
+		assertEquals(2,PC.ListMap.get("Lista1").length);
 	}
 	
 	
@@ -54,29 +54,26 @@ class PortableControllerTest {
 		//Inicialitzar llista amb 3 elements
 		PortableController PC = new PortableController();
 		int[] testArr = {0010001,0010002};
-		boolean res_RC1 = PC.RestaCodis("ObraPublica", testArr);
+		boolean res_RC1 = PC.RestaCodis("Lista1", testArr);
 		assertEquals(true, res_RC1);
-		assertEquals(1,PC.ListMap.get("ObraPublica").length);
+		assertEquals(1,PC.ListMap.get("Lista1").length);
 	}
 	
 	
 	//AddList
 	@Test
-	void testAddList_notfound() {
+	void testAddList() {
 		//Afegeix una llista nova
 		PortableController PC = new PortableController();
-		boolean res_XP1 = PC.AddList("ObraPublica");
+		boolean res_XP1 = PC.AddList("Lista1");
 		assertEquals(true, res_XP1);
-		assertEquals(true, PC.ListMap.containsKey("ObraPublica"));
-	}
-	
-	@Test
-	void testAddList_found() {
+		assertEquals(true, PC.ListMap.containsKey("Lista1"));
+
 		//Intenta afegir una llista que ja existeix
-		PortableController PC = new PortableController();
-		boolean res_XP1 = PC.AddList("ObraPublica");
+		PC = new PortableController();
+		res_XP1 = PC.AddList("Lista1");
 		assertEquals(false, res_XP1);
-		assertEquals(true, PC.ListMap.containsKey("ObraPublica"));
+		assertEquals(true, PC.ListMap.containsKey("Lista1"));
 	}
 	
 	
@@ -90,21 +87,18 @@ class PortableControllerTest {
 		//Esborra una llista existent
 		PortableController PC = new PortableController();
 		
-		assertEquals(true, PC.ListMap.containsKey("ObraPublica"));
-		boolean res_XP1 = PC.RemoveList("ObraPublica");
+		assertEquals(true, PC.ListMap.containsKey("Lista1"));
+		boolean res_XP1 = PC.RemoveList("Lista1");
 		assertEquals(true, res_XP1);
-		assertEquals(false, PC.ListMap.containsKey("ObraPublica"));
-	}
-	
-	@Test
-	void testRemoveList_notfound() {
+		assertEquals(false, PC.ListMap.containsKey("Lista1"));
+
 		//Esborra una llista inexistent
-		PortableController PC = new PortableController();
+		PC = new PortableController();
 		
-		assertEquals(true, PC.ListMap.containsKey("ObraPublica"));
-		boolean res_XP1 = PC.RemoveList("ObraPublica");
+		assertEquals(true, PC.ListMap.containsKey("Lista1"));
+		res_XP1 = PC.RemoveList("Lista1");
 		assertEquals(false, res_XP1);
-		assertEquals(false, PC.ListMap.containsKey("ObraPublica"));
+		assertEquals(false, PC.ListMap.containsKey("Lista1"));
 	}
 	
 	
@@ -112,8 +106,7 @@ class PortableControllerTest {
 		@Test
 		void testCheckListNameFromDatabase() {
 			PortableController PC = new PortableController();
-			//Inicialitzar llista "ObraPublica"
-			assertEquals(true, PC.CheckListNameFromDatabase("ObraPublica"));;
+			assertEquals(true, PC.CheckListNameFromDatabase(Lista1"));;
 		}
 	
 }
