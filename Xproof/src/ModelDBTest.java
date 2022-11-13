@@ -28,32 +28,43 @@ class ModelDBTest {
 		assertEquals(DB1.CheckListName("Patata Incorrecta"),false);
 	}
 	//Delete code from user in database
-	//if codes found, return true, else return false.
+	//if codes deleted, return true, else return false.
 	@Test
 	void testDeleteCodes() {
 		ModelDB DB = new ModelDB("User1","PASSWD1");
-		int[] aux ={05001,05002};
-		boolean CE = DB.DeleteCodes("Lista1", aux);
+		String[] aux ={"05001","05002"};
+		boolean CE = DB.DeleteCodes(aux);
 		assertEquals(DB.CheckListName("Lista1"),true);
 		assertEquals(CE,true);
 		File f = new File("C:\\Users\\Usuario\\eclipse-workspace\\Xproof\\Materials\\BD\\Users\\"+DB.UName+".txt");
 		try {
 			Scanner S = new Scanner(f);
 			String data = S.nextLine();
-			while(S.hasNextLine() && Integer.parseInt(data) != aux[0]) {
+			while(S.hasNextLine()) {
 				data = S.nextLine();
+				if (Integer.parseInt(data) == Integer.parseInt(aux[0]))
+					break;
 			}
 			S.close();
-			assertEquals(Integer.parseInt(data),aux[0]);
-			assertNotEquals(Integer.parseInt(data),aux[0]);
-			assertNotEquals(Integer.parseInt(data),aux[1]);
+			S = new Scanner(f);
+			data = S.nextLine();
+			while(S.hasNextLine()) {
+				data = S.nextLine();
+				if (Integer.parseInt(data) == Integer.parseInt(aux[1]))
+					break;
+			}
+			S.close();
+			assertNotEquals(Integer.parseInt(data),Integer.parseInt(aux[0]));
+			assertNotEquals(Integer.parseInt(data),Integer.parseInt(aux[1]));
 		}
 		catch(FileNotFoundException e) {
 			System.out.println("Error amb el fitxer");
 		}
-		CE = DB.DeleteCodes("Lista1", aux);
+		CE = DB.DeleteCodes(aux);
 		assertEquals(DB.CheckListName("Lista1"),true);
 		assertEquals(CE,false);
+		CE = DB.AddCodes(aux);
+		
 		
 	}
 	//addCode to user in database
@@ -62,36 +73,55 @@ class ModelDBTest {
 	@Test
 	void testAddCodes() {
 		ModelDB DB = new ModelDB("User1","PASSWD1");
-		int[] aux ={05001,05002};
-		boolean CE = DB.AddCodes("Lista1", aux);
+		String[] aux ={"05004","05005"};
+		boolean CE = DB.AddCodes(aux);
 		assertEquals(DB.CheckListName("Lista1"),true);
 		assertEquals(CE,true);
 		File f = new File("C:\\Users\\Usuario\\eclipse-workspace\\Xproof\\Materials\\BD\\Users\\"+DB.UName+".txt");
 		try {
 			Scanner S = new Scanner(f);
 			String data = S.nextLine();
-			while(S.hasNextLine() && Integer.parseInt(data) != aux[0]) {
+			while(S.hasNextLine()) {
 				data = S.nextLine();
+				if (Integer.parseInt(data) == Integer.parseInt(aux[0]))
+					break;
 			}
 			S.close();
-			assertEquals(Integer.parseInt(data),aux[0]);
-			while(S.hasNextLine() && Integer.parseInt(data) != aux[1]) {
-				data = S.nextLine();
+			S = new Scanner(f);
+			String data1 = S.nextLine();
+			while(S.hasNextLine()) {
+				data1 = S.nextLine();
+				if (Integer.parseInt(data1) == Integer.parseInt(aux[1]))
+					break;
 			}
 			S.close();
-			assertEquals(Integer.parseInt(data),aux[1]);
-			}
+			assertEquals(Integer.parseInt(data),Integer.parseInt(aux[0]));
+			assertEquals(Integer.parseInt(data1),Integer.parseInt(aux[1]));
+		}
 		catch(FileNotFoundException e) {
 			System.out.println("Error amb el fitxer");
 		}
-		
-		ModelDB DB1 = new ModelDB("User1","PASSWD1");
-		int[] aux1 ={05001,05002};
-		boolean CE1 = DB1.AddCodes("Patata Incorrecta", aux1);
-		assertEquals(DB1.CheckListName("Patata Incorrecta"),false);
-		assertEquals(CE1,false);
+		CE = DB.AddCodes(aux);
+		assertEquals(DB.CheckListName("Lista1"),true);
+		assertEquals(CE,false);
+		CE = DB.DeleteCodes(aux);
 	}
 	
+	@Test
+	void testCheckUsername() {
+		ModelDB DB = new ModelDB("User1","PASSWD1");
+		assertEquals(DB.CheckUserName(),true);
+		
+		DB = new ModelDB("Usernt", "PASSWDNT");
+		assertEquals(DB.CheckUserName(),false);
+	}
 	
-	
+	@Test
+	void testCheckUserPassword() {
+		ModelDB DB = new ModelDB("User1","PASSWD1");
+		assertEquals(DB.CheckUserPassword(),true);
+		
+		DB = new ModelDB("User1", "PASSWDNT");
+		assertEquals(DB.CheckUserPassword(),false);
+	}
 }
