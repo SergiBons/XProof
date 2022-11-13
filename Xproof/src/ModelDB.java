@@ -3,12 +3,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;  // Import the File class
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Scanner;
 
 
 public class ModelDB {
@@ -91,13 +93,27 @@ public class ModelDB {
 	}
 	
 	public boolean CheckUserName(){
-		
-		return true;
+		File f = new File("C:\\Users\\Usuario\\eclipse-workspace\\Xproof\\Materials\\BD\\Users\\"+UName+".txt");
+		if (f.exists()) {
+			return true;
+		}
+		else
+			return false;
 	  }
 	
 	public boolean CheckUserPassword() {
-		
-		return true;
+		File f = new File("C:\\Users\\Usuario\\eclipse-workspace\\Xproof\\Materials\\BD\\Users\\"+UName+".txt");
+		try {
+			Scanner S = new Scanner(f);
+			String data = S.nextLine();
+			S.close();
+			if (UPasswd.equals(data))
+				return true;
+			}
+		catch(FileNotFoundException e) {
+			return false;
+		}
+		return false;
 	}
 	
 }
