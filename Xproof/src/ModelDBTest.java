@@ -70,6 +70,7 @@ class ModelDBTest {
 	//addCode to user in database
 	//return true if codes were added or already there
 	//return false if list was not found
+	//TODO: check if codes in List BD
 	@Test
 	void testAddCodes() {
 		ModelDB DB = new ModelDB("User1","PASSWD1");

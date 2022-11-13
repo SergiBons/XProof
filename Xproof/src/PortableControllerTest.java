@@ -16,14 +16,14 @@ class PortableControllerTest {
 		assertEquals(true, PC1.ListMap.containsKey("Lista1"));
 		
 		//Constr amb nom de llista i codis
-		int[] aux = {0,0};
+		String[] aux = {"0","0"};
 		PortableController PC2 = new PortableController("Lista1", aux );
 		assertEquals(true, PC2.ListMap.containsKey("Lista1"));
 		assertEquals(aux, PC2.ListMap.get("Lista1"));
 		
 		//Constr amb LLista de LListes I Llista de Codis
-		int[] aux1 = {1,1};
-		int[][] auxList = {aux,aux1};
+		String[] aux1 = {"01001","01002"};
+		String[][] auxList = {aux,aux1};
 		String[] ListOLists = {"Lista1","Lista2"};
 		PortableController PC3 = new PortableController(ListOLists, auxList );
 		assertEquals(true, PC3.ListMap.containsKey("Lista1"));
@@ -32,16 +32,38 @@ class PortableControllerTest {
 		assertEquals(aux1, PC3.ListMap.get("Lista2"));
 		
 	}
-	
+	void testLogin() {
+		//Correct Login
+		PortableController PC = new PortableController();
+		PC.Login("User1", "PASSWD1");
+		assertEquals(PC.DB.UName, "User1");
+		assertEquals(PC.DB.UPasswd, "PASSWD1");
+
+		//Wrong Login
+		PC = new PortableController();
+		PC.Login("User100", "PASSWD1");
+		assertEquals(PC.DB.UName, "unlogged");
+		assertEquals(PC.DB.UPasswd, "unlogged");
+	}
 	//SumaCodis
 	@Test
 	void testSumaCodis() {
-		//Suma codis a una llista
-		PortableController PC = new PortableController();
-		int[] testArr = {0010001,0010002};
-		boolean res_SC1 = PC.SumaCodis("Lista1", testArr);
-		assertEquals(true, res_SC1);
-		assertEquals(2,PC.ListMap.get("Lista1").length);
+		//Suma codis a una llista (TOT OK)
+		PortableController PC = new PortableController("Lista1");
+		PC.Login("User1", "PASSWD1");
+		String[] testArr = {"01001","01002"};
+		boolean res_SC = PC.SumaCodis("Lista1", testArr);
+		assertEquals(true, res_SC);
+		
+		//Suma codis a una llista nova (TOT OK)
+		PC = new PortableController();
+		res_SC = PC.SumaCodis("Lista1", testArr);
+		assertEquals(true, res_SC);
+		
+		//(Codis Ja en User) (NOK)
+		PC = new PortableController("Lista1",testArr);
+		res_SC = PC.SumaCodis("Lista1", testArr);
+		assertEquals(false, res_SC);
 	}
 	
 	
@@ -49,14 +71,23 @@ class PortableControllerTest {
 	//RestaCodis
 	@Test
 	void testRestaCodis() {
-		//Resta codis d'una llista, pero no la buida
-		
-		//Inicialitzar llista amb 3 elements
-		PortableController PC = new PortableController();
-		int[] testArr = {0010001,0010002};
-		boolean res_RC1 = PC.RestaCodis("Lista1", testArr);
-		assertEquals(true, res_RC1);
-		assertEquals(1,PC.ListMap.get("Lista1").length);
+		//Resta codis a una llista (TOT OK)
+		String[] testArr = {"01001","01002","01003"};
+		String[] testArrAux = {"01001","01002"};
+		PortableController PC = new PortableController("Lista1",testArr);
+		PC.Login("User1", "PASSWD1");
+		boolean res_SC = PC.RestaCodis("Lista1", testArr);
+		assertEquals(true, res_SC);
+				
+		//Suma codis a una llista nova (TOT OK)
+		PC = new PortableController();
+		res_SC = PC.SumaCodis("Lista1", testArr);
+		assertEquals(true, res_SC);
+			
+		//(Codis Ja en User) (NOK)
+		PC = new PortableController("Lista1",testArr);
+		res_SC = PC.SumaCodis("Lista1", testArr);
+		assertEquals(false, res_SC);
 	}
 	
 	
@@ -65,14 +96,18 @@ class PortableControllerTest {
 	void testAddList() {
 		//Afegeix una llista nova
 		PortableController PC = new PortableController();
-		boolean res_XP1 = PC.AddList("Lista1");
-		assertEquals(true, res_XP1);
-		assertEquals(true, PC.ListMap.containsKey("Lista1"));
-
+		PC.Login("User1", "PASSWD1");
+		boolean res_AL = PC.AddList("Lista5");
+		assertEquals(true, res_AL);
+		assertEquals(true, PC.ListMap.containsKey("Lista5"));
+		boolean res_RL = PC.RemoveList("Lista5");
+		assertEquals(true, res_RL);
+		assertEquals(false, PC.ListMap.containsKey("Lista5"));
+		
 		//Intenta afegir una llista que ja existeix
 		PC = new PortableController();
-		res_XP1 = PC.AddList("Lista1");
-		assertEquals(false, res_XP1);
+		res_AL = PC.AddList("Lista1");
+		assertEquals(false, res_AL);
 		assertEquals(true, PC.ListMap.containsKey("Lista1"));
 	}
 	
@@ -83,30 +118,44 @@ class PortableControllerTest {
 	
 	//RemoveList
 	@Test
-	void testRemoveList_found() {
+	void testRemoveList() {
 		//Esborra una llista existent
 		PortableController PC = new PortableController();
+		PC.Login("User1", "PASSWD1");
 		
 		assertEquals(true, PC.ListMap.containsKey("Lista1"));
-		boolean res_XP1 = PC.RemoveList("Lista1");
-		assertEquals(true, res_XP1);
+		boolean res_RL = PC.RemoveList("Lista1");
+		assertEquals(true, res_RL);
 		assertEquals(false, PC.ListMap.containsKey("Lista1"));
-
+		boolean res_AL = PC.AddList("Lista1");
+		assertEquals(true, res_AL);
+		assertEquals(true, PC.ListMap.containsKey("Lista1"));
+		
+		
 		//Esborra una llista inexistent
 		PC = new PortableController();
-		
-		assertEquals(true, PC.ListMap.containsKey("Lista1"));
-		res_XP1 = PC.RemoveList("Lista1");
-		assertEquals(false, res_XP1);
-		assertEquals(false, PC.ListMap.containsKey("Lista1"));
+		assertEquals(false, PC.ListMap.containsKey("Listant"));
+		res_RL = PC.RemoveList("Listant");
+		assertEquals(false, res_RL);
 	}
 	
 	
 	//CheckListNameFromDatabase
-		@Test
-		void testCheckListNameFromDatabase() {
+	@Test
+	void testCheckListNameFromDatabase() {
 			PortableController PC = new PortableController();
-			assertEquals(true, PC.CheckListNameFromDatabase(Lista1"));;
-		}
+			assertEquals(true, PC.CheckListNameFromDatabase("Lista1"));
+			assertEquals(false, PC.CheckListNameFromDatabase("Listant"));
+	}
 	
+	//CheckCodesExist
+	void testCheckCodesExist() {
+		PortableController PC = new PortableController();
+		ModelDB DB = new ModelDB("User1","PASSWD1");
+		String[] auxList = {"01001","01002"};
+		assertEquals(PC.CheckCodesExist("List1", auxList) , false);
+		DB.AddCodes(auxList);
+		assertEquals(PC.CheckCodesExist("List1", auxList) , true);
+	}
+		
 }

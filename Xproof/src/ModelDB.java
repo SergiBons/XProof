@@ -60,7 +60,7 @@ public class ModelDB {
 		
 		return ret;
 	}
-	
+	//TODO: check if codes in List BD
 	public boolean AddCodes( String[] ListOCodes) {
 		boolean repeated = false, nROnce = true;
 		try {
