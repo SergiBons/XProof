@@ -16,7 +16,7 @@ class PortableControllerTest {
 		assertEquals(true, PC1.ListMap.containsKey("Lista1"));
 		
 		//Constr amb nom de llista i codis
-		String[] aux = {"0","0"};
+		String[] aux = {"01001","01002"};
 		PortableController PC2 = new PortableController("Lista1", aux );
 		assertEquals(true, PC2.ListMap.containsKey("Lista1"));
 		assertEquals(aux, PC2.ListMap.get("Lista1"));
@@ -76,18 +76,19 @@ class PortableControllerTest {
 		String[] testArrAux = {"01001","01002"};
 		PortableController PC = new PortableController("Lista1",testArr);
 		PC.Login("User1", "PASSWD1");
-		boolean res_SC = PC.RestaCodis("Lista1", testArr);
-		assertEquals(true, res_SC);
+		boolean res_RC = PC.RestaCodis("Lista1", testArrAux);
+		assertEquals(true, res_RC);
 				
-		//Suma codis a una llista nova (TOT OK)
-		PC = new PortableController();
-		res_SC = PC.SumaCodis("Lista1", testArr);
-		assertEquals(true, res_SC);
-			
-		//(Codis Ja en User) (NOK)
+		//Resta codis a una llista i l'esborra (TOT OK)
 		PC = new PortableController("Lista1",testArr);
-		res_SC = PC.SumaCodis("Lista1", testArr);
-		assertEquals(false, res_SC);
+		PC.Login("User1", "PASSWD1");
+		res_RC = PC.RestaCodis("Lista1", testArr);
+		assertEquals(true, res_RC);
+			
+		//(Codis no en User) (NOK)
+		PC = new PortableController("Lista1",testArr);
+		res_RC = PC.SumaCodis("Lista1", testArr);
+		assertEquals(false, res_RC);
 	}
 	
 	
@@ -151,11 +152,24 @@ class PortableControllerTest {
 	//CheckCodesExist
 	void testCheckCodesExist() {
 		PortableController PC = new PortableController();
-		ModelDB DB = new ModelDB("User1","PASSWD1");
+		PC.Login("User1","PASSWD1");
 		String[] auxList = {"01001","01002"};
 		assertEquals(PC.CheckCodesExist("List1", auxList) , false);
-		DB.AddCodes(auxList);
+		PC.DB.AddCodes(auxList);
 		assertEquals(PC.CheckCodesExist("List1", auxList) , true);
 	}
 		
+	void testCheckUserHasCodes() {
+		//user has codes
+		String[] aux = {"01001","01002"};
+		String[] auxnt = {"01010","01020"};
+		PortableController PC = new PortableController();
+		PC.Login("User1","PASSWD1");
+		assertEquals(PC.CheckIfUserHasCodes(aux),true);
+		
+		//user hasnt codes
+		PC = new PortableController();
+		PC.Login("User1","PASSWD1");
+		assertEquals(PC.CheckIfUserHasCodes(auxnt),false);
+	}
 }

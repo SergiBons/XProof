@@ -106,4 +106,8 @@ public class PortableController {
 		return true;
 	}
 	
+	public boolean CheckIfUserHasCodes(String[] codis) {
+		
+		return true;
+	}
 }
