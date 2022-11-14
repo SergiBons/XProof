@@ -89,28 +89,59 @@ public class PortableController {
 	//Subfuncions
 	
 	public boolean CheckListNameFromDatabase(String name) {
-		
-		
-		return true;
+		File f = new File("C:\\Users\\Usuario\\eclipse-workspace\\Xproof\\Materials\\BD\\Lists\\"+name+".txt");
+		if (f.exists()) 
+			return true;
+		else
+			return false;
 	}	
 	
 	public boolean AddList(String ListName) {
-		
-		
-		return true;
+		if (ListMap.containsKey(ListName))
+			return false;
+		else {
+			ListMap.put(ListName,null);
+			return true;
+		}
 	}
 	
 	public boolean RemoveList(String ListName) {
-		
-		
-		return true;
+		if (ListMap.containsKey(ListName)) {
+			ListMap.remove(ListName);
+			return true;
+		}
+		else
+			return false;
 	}
 	
 	public boolean CheckCodesExist(String list, String[] codis ) {
 		
-		
-		
-		return true;
+		File f = new File("C:\\Users\\Usuario\\eclipse-workspace\\Xproof\\Materials\\BD\\Lists\\"+list+".txt");
+		int coincidenceCounter = 0;
+		for (int i = 0; i<codis.length;i++)
+		{
+			try {
+				Scanner S = new Scanner(f);
+				String data = S.nextLine();
+				while(S.hasNextLine()) {					
+					if (data.equals(codis[i]))
+						{
+						coincidenceCounter++;
+						break;
+						}
+					else
+						data = S.nextLine();
+				}
+				S.close();
+			}
+			catch(FileNotFoundException e) {
+				System.out.println("Error a checkCodesExist");
+			}
+		}
+		if (coincidenceCounter == codis.length)
+			return true;
+		else
+			return false;
 	}
 	
 	public boolean CheckIfUserHasCodes(String[] codis) {
