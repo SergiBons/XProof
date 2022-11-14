@@ -189,4 +189,20 @@ class PortableControllerTest {
 		PC.Login("User1","PASSWD1");
 		assertEquals(PC.CheckIfUserHasCodes(auxnt),false);
 	}
+	
+	@Test
+	void testUpdateUserData() {
+		PortableController PC = new PortableController();
+		String[] aux1 = {"L101","L102"};
+		String[] aux2 = {"L201","L202"};
+		PC.UpdateUserData();
+		assertEquals(PC.ListMap.containsKey("L1"),true);
+		assertEquals(PC.ListMap.containsKey("L2"),false);
+		assertEquals(PC.ListMap.get("L1").equals(aux1),true);
+		assertEquals(PC.ListMap.get("L2").equals(aux2),true);
+		
+	}
+	
+	
+	
 }
