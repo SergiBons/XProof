@@ -1,5 +1,7 @@
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Arrays;
+
 import org.junit.jupiter.api.Test;
 
 class PortableControllerTest {
@@ -61,12 +63,14 @@ class PortableControllerTest {
 		
 		//Suma codis a una llista nova (TOT OK)
 		PC = new PortableController();
+		PC.Login("User1", "PASSWD1");
 		res_SC = PC.SumaCodis("Lista1", testArr);
 		assertEquals(true, res_SC);
 		assertEquals(PC.ListMap.get("Lista1"),testArr);
 		
 		//(Codis Ja en User) (NOK)
 		PC = new PortableController("Lista1",testArr);
+		PC.Login("User1", "PASSWD1");
 		res_SC = PC.SumaCodis("Lista1", testArr);
 		assertEquals(false, res_SC);
 		assertEquals(PC.ListMap.get("Lista1"),testArr);
@@ -85,7 +89,7 @@ class PortableControllerTest {
 		PC.Login("User1", "PASSWD1");
 		boolean res_RC = PC.RestaCodis("Lista1", testArrAux);
 		assertEquals(true, res_RC);
-		assertEquals(PC.ListMap.get("Lista1"),testArrRes);
+		assertEquals(Arrays.equals(PC.ListMap.get("Lista1"),testArrRes),true);
 				
 		//Resta codis a una llista i l'esborra (TOT OK)
 		PC = new PortableController("Lista1",testArr);
@@ -94,8 +98,8 @@ class PortableControllerTest {
 		assertEquals(true, res_RC);
 		assertEquals(PC.ListMap.containsKey("Lista1"),false);
 		
-		//(Codis no en User) (NOK)
-		PC = new PortableController("Lista1",testArr);
+		//(User no te codis a la llista) (NOK)
+		PC = new PortableController("Lista1");
 		res_RC = PC.RestaCodis("Lista1", testArr);
 		assertEquals(false, res_RC);
 		assertEquals(PC.ListMap.containsKey("Lista1"),true);
@@ -117,6 +121,7 @@ class PortableControllerTest {
 		
 		//Intenta afegir una llista que ja existeix
 		PC = new PortableController("Lista1");
+		PC.Login("User1", "PASSWD1");
 		res_AL = PC.AddList("Lista1");
 		assertEquals(false, res_AL);
 		assertEquals(true, PC.ListMap.containsKey("Lista1"));

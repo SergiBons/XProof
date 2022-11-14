@@ -2,9 +2,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
-
 public class PortableController {
 
 	
@@ -63,18 +64,55 @@ public class PortableController {
 	//Funcions principals
 
 	public boolean SumaCodis(String list, String[] CodeList){
-		
+		ArrayList<String> aux = new ArrayList<String>();
+					if (!Arrays.equals(ListMap.get(list), CodeList)) {
+						if(AddList(list))
+							ListMap.put(list, CodeList);
+						else
+						{
+								for (int i = 0; i<CodeList.length;i++)
+									aux.add(CodeList[i]);
+							String[] fin = aux.toArray(new String[0]);
+							ListMap.put(list, fin);
+						}
+					}
+					else
+						return false;
+			ListMap.put(list, CodeList);
 		
 		return true;
 	}
 	
 	public boolean RestaCodis (String list, String[] CodeList) {
-		
-		
-		
+		ArrayList<String> aux = new ArrayList<String>();
+		int ret = 0;
+		if (ListMap.get(list) == null)
+			return false;
+		else {
+			for(int i = 0;i<ListMap.get(list).length;i++)
+			{
+				boolean check = false;
+				for (int j = 0; j<CodeList.length;j++) {
+					if (ListMap.get(list)[i].equals(CodeList[j])) {
+						ret++;
+						check = true;
+						break;
+					}
+				}
+				if (check == false)
+					aux.add(ListMap.get(list)[i]);
+			}
+			if (aux.isEmpty())
+			{
+				RemoveList(list);
+			}
+			else {
+				String[] fin = aux.toArray(new String[0]);
+				ListMap.put(list, fin);
+				}
+		}
 		return true;
 	}
-	
 	
 	
 	
