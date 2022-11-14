@@ -16,7 +16,6 @@ public class MainScreenView {
 	
 	
 	public void PrintAlertMessage(String Message) {
-		clearScreen();
 		System.out.print("\n------------------------\n");
 		System.out.print("--------");
 		System.out.print(Message);
@@ -75,4 +74,15 @@ public class MainScreenView {
 	    System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");  
 	    System.out.flush();  
 	}  
+	
+	public void ShowSelectorAlert() {
+		PrintAlertMessage("What would you like to do next?\n");
+		PrintAlertMessage("Insert Number:");
+		PrintAlertMessage("0:Exit Program\n");
+		PrintAlertMessage("1:Log Out\n");
+		PrintAlertMessage("2:Interact With Terminal\n");
+		
+		
+	}
+	
 }
