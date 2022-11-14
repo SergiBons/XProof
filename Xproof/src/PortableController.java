@@ -210,9 +210,23 @@ public class PortableController {
 			return false;
 	}
 	
-	public void UpdateUserData() {
-		
-		
+	public void InitUserData() {
+		File f = new File("C:\\Users\\Usuario\\eclipse-workspace\\Xproof\\Materials\\BD\\Users\\"+DB.UName+".txt");
+		try {
+			Scanner S = new Scanner(f);
+			String data = S.nextLine();
+			while(S.hasNextLine()) {
+				data = S.nextLine();
+				int EndOfName = data.indexOf("0");
+				String LName = data.substring(0, EndOfName);
+				String[] aux = {data};
+				SumaCodis(LName,aux);
+					}
+			S.close();
+		}
+		catch(FileNotFoundException e) {
+			System.out.println("Error a checkIfUserHasCodes");
+		}
 		
 	}
 	

@@ -191,11 +191,12 @@ class PortableControllerTest {
 	}
 	
 	@Test
-	void testUpdateUserData() {
+	void testInitUserData() {
 		PortableController PC = new PortableController();
 		String[] aux1 = {"L101","L102"};
 		String[] aux2 = {"L201","L202"};
-		PC.UpdateUserData();
+		PC.Login("User2", "PASSWD2");
+		PC.InitUserData();
 		assertEquals(PC.ListMap.containsKey("L1"),true);
 		assertEquals(PC.ListMap.containsKey("L2"),false);
 		assertEquals(PC.ListMap.get("L1").equals(aux1),true);
