@@ -76,6 +76,14 @@ class MainScreenViewTest {
 	    res = MSV.LoginOrRegister();;
 	    System.setIn(stdin);
 	    assertEquals(res,true);
+	    
+		MSV = new MainScreenView();
+		MUI = new MockUserInput();
+	    stdin = System.in;
+	    MUI.MockUserSelectDataReg();
+	    res = MSV.LoginOrRegister();;
+	    System.setIn(stdin);
+	    assertEquals(res,true);
 	}
 	
 	
