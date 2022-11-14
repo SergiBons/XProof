@@ -59,21 +59,42 @@ class PortableControllerTest {
 		String[] testArr = {"L101","L102"};
 		boolean res_SC = PC.SumaCodis("L1", testArr);
 		assertEquals(true, res_SC);
-		assertEquals(PC.ListMap.get("L1"),testArr);
+		assertEquals(Arrays.equals(PC.ListMap.get("L1"),testArr),true);
 		
 		//Suma codis a una llista nova (TOT OK)
 		PC = new PortableController();
 		PC.Login("User1", "PASSWD1");
 		res_SC = PC.SumaCodis("L1", testArr);
 		assertEquals(true, res_SC);
-		assertEquals(PC.ListMap.get("L1"),testArr);
+		assertEquals(Arrays.equals(PC.ListMap.get("L1"),testArr),true);
 		
 		//(Codis Ja en User) (NOK)
 		PC = new PortableController("L1",testArr);
 		PC.Login("User1", "PASSWD1");
 		res_SC = PC.SumaCodis("L1", testArr);
 		assertEquals(false, res_SC);
-		assertEquals(PC.ListMap.get("L1"),testArr);
+		assertEquals(Arrays.equals(PC.ListMap.get("L1"),testArr),true);
+		
+		//Codis a llista inexistent
+		PC = new PortableController();
+		PC.Login("User1", "PASSWD1");
+		res_SC = PC.SumaCodis("L7", testArr);
+		assertEquals(false, res_SC);
+
+		//codis inexistents a llista existent
+		String[] TestWrong = {"1231230","123123120"};
+		PC = new PortableController();
+		PC.Login("User1", "PASSWD1");
+		res_SC = PC.SumaCodis("L1", TestWrong);
+		assertEquals(false, res_SC);
+
+		
+		//Usuari sense codis a DB
+		String[] TestDiffList = {"L301","L302"};
+		PC = new PortableController();
+		PC.Login("User1", "PASSWD1");
+		res_SC = PC.SumaCodis("L3", TestDiffList);
+		assertEquals(false, res_SC);
 	}
 	
 	
