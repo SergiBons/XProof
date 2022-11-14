@@ -219,9 +219,9 @@ class PortableControllerTest {
 		PC.Login("User2", "PASSWD2");
 		PC.InitUserData();
 		assertEquals(PC.ListMap.containsKey("L1"),true);
-		assertEquals(PC.ListMap.containsKey("L2"),false);
-		assertEquals(PC.ListMap.get("L1").equals(aux1),true);
-		assertEquals(PC.ListMap.get("L2").equals(aux2),true);
+		assertEquals(PC.ListMap.containsKey("L2"),true);
+		assertEquals(Arrays.equals(PC.ListMap.get("L1"),aux1),true);
+		assertEquals(Arrays.equals(PC.ListMap.get("L2"),aux2),true);
 		
 	}
 	

@@ -65,22 +65,43 @@ public class PortableController {
 
 	public boolean SumaCodis(String list, String[] CodeList){
 		ArrayList<String> aux = new ArrayList<String>();
+		if(CheckListNameFromDatabase(list)) {
+			if(CheckCodesExist(list, CodeList))
+			{
+				if(CheckIfUserHasCodes(CodeList))
+				{
 					if (!Arrays.equals(ListMap.get(list), CodeList)) {
 						if(AddList(list))
 							ListMap.put(list, CodeList);
 						else
 						{
+						if(ListMap.get(list) != null)
+						{
+							for (int i = 0; i<ListMap.get(list).length;i++) 
+								aux.add(ListMap.get(list)[i]);
+							for (int i = 0; i<CodeList.length;i++)
+								aux.add(CodeList[i]);
+						}
+						else
+						
 								for (int i = 0; i<CodeList.length;i++)
 									aux.add(CodeList[i]);
 							String[] fin = aux.toArray(new String[0]);
 							ListMap.put(list, fin);
-						}
+							}
+						return true;
 					}
 					else
 						return false;
-			ListMap.put(list, CodeList);
-		
-		return true;
+				}
+				else
+					return false;
+			}
+			else
+				return false;
+		}
+		else
+			return false;
 	}
 	
 	public boolean RestaCodis (String list, String[] CodeList) {
@@ -88,31 +109,31 @@ public class PortableController {
 		int ret = 0;
 		if (ListMap.get(list) == null)
 			return false;
-		else {
-			for(int i = 0;i<ListMap.get(list).length;i++)
-			{
-				boolean check = false;
-				for (int j = 0; j<CodeList.length;j++) {
-					if (ListMap.get(list)[i].equals(CodeList[j])) {
-						ret++;
-						check = true;
-						break;
-					}
+		else
+		for(int i = 0;i<ListMap.get(list).length;i++){
+			boolean check = false;
+			for (int j = 0; j<CodeList.length;j++) {
+				if (ListMap.get(list)[i].equals(CodeList[j])) {
+					ret++;
+					check = true;
+					break;
 				}
-				if (check == false)
-					aux.add(ListMap.get(list)[i]);
 			}
-			if (aux.isEmpty())
-			{
-				RemoveList(list);
-			}
-			else {
-				String[] fin = aux.toArray(new String[0]);
-				ListMap.put(list, fin);
-				}
+			if (check == false)
+				aux.add(ListMap.get(list)[i]);
 		}
-		return true;
+		if (aux.isEmpty())
+			RemoveList(list);
+		else {
+			String[] fin = aux.toArray(new String[0]);
+			ListMap.put(list, fin);
+		}
+		if (ret == CodeList.length)
+			return true;
+		else 
+			return false;
 	}
+
 	
 	
 	
