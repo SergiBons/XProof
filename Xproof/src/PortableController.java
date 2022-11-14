@@ -192,7 +192,7 @@ public class PortableController {
 				String data = S.nextLine();
 				while(S.hasNextLine()) {
 					data = S.nextLine();
-					if (Integer.parseInt(data) == Integer.parseInt(codis[i]))
+					if (data.equals(codis[i]))
 						{
 						coincidenceCounter++;
 						break;

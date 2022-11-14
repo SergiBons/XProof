@@ -21,7 +21,7 @@ class ModelDBTest {
 	@Test
 	void testCheckListName() {
 		ModelDB DB = new ModelDB("User1","PASSWD1");
-		assertEquals(DB.CheckListName("Lista1"),true);
+		assertEquals(DB.CheckListName("L1"),true);
 		
 		
 		ModelDB DB1 = new ModelDB("User1","PASSWD10");
@@ -32,9 +32,9 @@ class ModelDBTest {
 	@Test
 	void testDeleteCodes() {
 		ModelDB DB = new ModelDB("User1","PASSWD1");
-		String[] aux ={"05001","05002"};
+		String[] aux ={"L501","L502"};
 		boolean CE = DB.DeleteCodes(aux);
-		assertEquals(DB.CheckListName("Lista1"),true);
+		assertEquals(DB.CheckListName("L1"),true);
 		assertEquals(CE,true);
 		File f = new File("C:\\Users\\Usuario\\eclipse-workspace\\Xproof\\Materials\\BD\\Users\\"+DB.UName+".txt");
 		try {
@@ -42,7 +42,7 @@ class ModelDBTest {
 			String data = S.nextLine();
 			while(S.hasNextLine()) {
 				data = S.nextLine();
-				if (Integer.parseInt(data) == Integer.parseInt(aux[0]))
+				if (data.equals(aux[0]))
 					break;
 			}
 			S.close();
@@ -50,18 +50,18 @@ class ModelDBTest {
 			data = S.nextLine();
 			while(S.hasNextLine()) {
 				data = S.nextLine();
-				if (Integer.parseInt(data) == Integer.parseInt(aux[1]))
+				if (data.equals(aux[1]))
 					break;
 			}
 			S.close();
-			assertNotEquals(Integer.parseInt(data),Integer.parseInt(aux[0]));
-			assertNotEquals(Integer.parseInt(data),Integer.parseInt(aux[1]));
+			assertEquals(data.equals(aux[0]),false);
+			assertEquals(data.equals(aux[1]),false);
 		}
 		catch(FileNotFoundException e) {
 			System.out.println("Error amb el fitxer");
 		}
 		CE = DB.DeleteCodes(aux);
-		assertEquals(DB.CheckListName("Lista1"),true);
+		assertEquals(DB.CheckListName("L1"),true);
 		assertEquals(CE,false);
 		CE = DB.AddCodes(aux);
 		
@@ -74,9 +74,9 @@ class ModelDBTest {
 	@Test
 	void testAddCodes() {
 		ModelDB DB = new ModelDB("User1","PASSWD1");
-		String[] aux ={"05004","05005"};
+		String[] aux ={"L504","L505"};
 		boolean CE = DB.AddCodes(aux);
-		assertEquals(DB.CheckListName("Lista1"),true);
+		assertEquals(DB.CheckListName("L1"),true);
 		assertEquals(CE,true);
 		File f = new File("C:\\Users\\Usuario\\eclipse-workspace\\Xproof\\Materials\\BD\\Users\\"+DB.UName+".txt");
 		try {
@@ -84,7 +84,7 @@ class ModelDBTest {
 			String data = S.nextLine();
 			while(S.hasNextLine()) {
 				data = S.nextLine();
-				if (Integer.parseInt(data) == Integer.parseInt(aux[0]))
+				if (data.equals(aux[0]))
 					break;
 			}
 			S.close();
@@ -92,18 +92,18 @@ class ModelDBTest {
 			String data1 = S.nextLine();
 			while(S.hasNextLine()) {
 				data1 = S.nextLine();
-				if (Integer.parseInt(data1) == Integer.parseInt(aux[1]))
+				if (data.equals(aux[1]))
 					break;
 			}
 			S.close();
-			assertEquals(Integer.parseInt(data),Integer.parseInt(aux[0]));
-			assertEquals(Integer.parseInt(data1),Integer.parseInt(aux[1]));
+			assertEquals(data.equals(aux[0]),true);
+			assertEquals(data1.equals(aux[1]),true);
 		}
 		catch(FileNotFoundException e) {
 			System.out.println("Error amb el fitxer");
 		}
 		CE = DB.AddCodes(aux);
-		assertEquals(DB.CheckListName("Lista1"),true);
+		assertEquals(DB.CheckListName("L1"),true);
 		assertEquals(CE,false);
 		CE = DB.DeleteCodes(aux);
 	}

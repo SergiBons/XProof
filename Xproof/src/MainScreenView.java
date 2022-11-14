@@ -4,23 +4,35 @@ import java.util.Scanner;
 public class MainScreenView {
 	public void UpdateListView(HashMap<String, String[]> ListMap) {
 		clearScreen();
+		System.out.print("------Welcome-------\n");
 		for (String NomLlista :ListMap.keySet()) {
 			System.out.print("--------------------\n");
 			System.out.print(NomLlista);
+			System.out.print("\nPoints: ");
 			System.out.print(ListMap.get(NomLlista).length);
-			System.out.print("--------------------\n");
+			System.out.print("\n--------------------\n");
 		}
+	}
+	
+	
+	public void PrintAlertMessage(String Message) {
+		clearScreen();
+		System.out.print("\n------------------------\n");
+		System.out.print("--------");
+		System.out.print(Message);
+		System.out.print("--------");
+		System.out.print("\n------------------------\n");
 	}
 	public String[] LoginView(){
 		Scanner scanner = new Scanner(System.in);
 		clearScreen();
-		System.out.print("----PLEASE LOG IN-------\n");
+		System.out.print("\n----PLEASE LOG IN-------\n");
 		System.out.print("\nUserName:");
 		String UserName = scanner.nextLine();
 		System.out.print("\nPassword:");
 		String Passwd = scanner.nextLine();
 		scanner.close();
-		System.out.print("Attempting log in\n");
+		System.out.print("\nAttempting log in\n");
 		System.out.print(".\n");
 		System.out.print(".\n");
 		System.out.print(".\n");
@@ -31,13 +43,13 @@ public class MainScreenView {
 	public String[] RegisterView(){
 		Scanner scanner = new Scanner(System.in);
 		clearScreen();
-		System.out.print("----PLEASE ENTER YOUR DATA-------\n");
+		System.out.print("\n----PLEASE ENTER YOUR DATA-------\n");
 		System.out.print("\n UserName:");
 		String UserName = scanner.nextLine();
 		System.out.print("\n Password:");
 		String Passwd = scanner.nextLine();
 		scanner.close();
-		System.out.print("Registering\n");
+		System.out.print("\nRegistering\n");
 		System.out.print(".\n");
 		System.out.print(".\n");
 		System.out.print(".\n");
@@ -60,7 +72,7 @@ public class MainScreenView {
 	}
 	
 	public static void clearScreen() {  
-	    System.out.print("\033[H\033[2J");  
+	    System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");  
 	    System.out.flush();  
 	}  
 }

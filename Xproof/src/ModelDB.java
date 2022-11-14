@@ -18,6 +18,10 @@ public class ModelDB {
 	String UPasswd;
 	
 	
+	public ModelDB() {
+		UName = "unlogged";
+		UPasswd = "unlogged";	}
+	
 	public ModelDB(String UserName, String UserPasswd) {
 		UName = UserName;
 		UPasswd = UserPasswd;	}

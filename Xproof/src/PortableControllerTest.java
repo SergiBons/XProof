@@ -14,24 +14,24 @@ class PortableControllerTest {
 		assertNotNull(PC.ListMap);
 		
 		//Constr amb nom de llista
-		PortableController PC1 = new PortableController("Lista1");
-		assertEquals(true, PC1.ListMap.containsKey("Lista1"));
+		PortableController PC1 = new PortableController("L1");
+		assertEquals(true, PC1.ListMap.containsKey("L1"));
 		
 		//Constr amb nom de llista i codis
-		String[] aux = {"01001","01002"};
-		PortableController PC2 = new PortableController("Lista1", aux );
-		assertEquals(true, PC2.ListMap.containsKey("Lista1"));
-		assertEquals(aux, PC2.ListMap.get("Lista1"));
+		String[] aux = {"L101","L102"};
+		PortableController PC2 = new PortableController("L1", aux );
+		assertEquals(true, PC2.ListMap.containsKey("L1"));
+		assertEquals(aux, PC2.ListMap.get("L1"));
 		
 		//Constr amb LLista de LListes I Llista de Codis
-		String[] aux1 = {"01001","01002"};
+		String[] aux1 = {"L101","L102"};
 		String[][] auxList = {aux,aux1};
-		String[] ListOLists = {"Lista1","Lista2"};
+		String[] ListOLists = {"L1","L2"};
 		PortableController PC3 = new PortableController(ListOLists, auxList );
-		assertEquals(true, PC3.ListMap.containsKey("Lista1"));
-		assertEquals(true, PC3.ListMap.containsKey("Lista2"));
-		assertEquals(aux, PC3.ListMap.get("Lista1"));
-		assertEquals(aux1, PC3.ListMap.get("Lista2"));
+		assertEquals(true, PC3.ListMap.containsKey("L1"));
+		assertEquals(true, PC3.ListMap.containsKey("L2"));
+		assertEquals(aux, PC3.ListMap.get("L1"));
+		assertEquals(aux1, PC3.ListMap.get("L2"));
 		
 	}
 	@Test
@@ -54,26 +54,26 @@ class PortableControllerTest {
 	@Test
 	void testSumaCodis() {
 		//Suma codis a una llista (TOT OK)
-		PortableController PC = new PortableController("Lista1");
+		PortableController PC = new PortableController("L1");
 		PC.Login("User1", "PASSWD1");
-		String[] testArr = {"01001","01002"};
-		boolean res_SC = PC.SumaCodis("Lista1", testArr);
+		String[] testArr = {"L101","L102"};
+		boolean res_SC = PC.SumaCodis("L1", testArr);
 		assertEquals(true, res_SC);
-		assertEquals(PC.ListMap.get("Lista1"),testArr);
+		assertEquals(PC.ListMap.get("L1"),testArr);
 		
 		//Suma codis a una llista nova (TOT OK)
 		PC = new PortableController();
 		PC.Login("User1", "PASSWD1");
-		res_SC = PC.SumaCodis("Lista1", testArr);
+		res_SC = PC.SumaCodis("L1", testArr);
 		assertEquals(true, res_SC);
-		assertEquals(PC.ListMap.get("Lista1"),testArr);
+		assertEquals(PC.ListMap.get("L1"),testArr);
 		
 		//(Codis Ja en User) (NOK)
-		PC = new PortableController("Lista1",testArr);
+		PC = new PortableController("L1",testArr);
 		PC.Login("User1", "PASSWD1");
-		res_SC = PC.SumaCodis("Lista1", testArr);
+		res_SC = PC.SumaCodis("L1", testArr);
 		assertEquals(false, res_SC);
-		assertEquals(PC.ListMap.get("Lista1"),testArr);
+		assertEquals(PC.ListMap.get("L1"),testArr);
 	}
 	
 	
@@ -82,27 +82,27 @@ class PortableControllerTest {
 	@Test
 	void testRestaCodis() {
 		//Resta codis a una llista (TOT OK)
-		String[] testArr = {"01001","01002","01003"};
-		String[] testArrAux = {"01001","01002"};
-		String[] testArrRes = {"01003"};
-		PortableController PC = new PortableController("Lista1",testArr);
+		String[] testArr = {"L101","L102","L103"};
+		String[] testArrAux = {"L101","L102"};
+		String[] testArrRes = {"L103"};
+		PortableController PC = new PortableController("L1",testArr);
 		PC.Login("User1", "PASSWD1");
-		boolean res_RC = PC.RestaCodis("Lista1", testArrAux);
+		boolean res_RC = PC.RestaCodis("L1", testArrAux);
 		assertEquals(true, res_RC);
-		assertEquals(Arrays.equals(PC.ListMap.get("Lista1"),testArrRes),true);
+		assertEquals(Arrays.equals(PC.ListMap.get("L1"),testArrRes),true);
 				
 		//Resta codis a una llista i l'esborra (TOT OK)
-		PC = new PortableController("Lista1",testArr);
+		PC = new PortableController("L1",testArr);
 		PC.Login("User1", "PASSWD1");
-		res_RC = PC.RestaCodis("Lista1", testArr);
+		res_RC = PC.RestaCodis("L1", testArr);
 		assertEquals(true, res_RC);
-		assertEquals(PC.ListMap.containsKey("Lista1"),false);
+		assertEquals(PC.ListMap.containsKey("L1"),false);
 		
 		//(User no te codis a la llista) (NOK)
-		PC = new PortableController("Lista1");
-		res_RC = PC.RestaCodis("Lista1", testArr);
+		PC = new PortableController("L1");
+		res_RC = PC.RestaCodis("L1", testArr);
 		assertEquals(false, res_RC);
-		assertEquals(PC.ListMap.containsKey("Lista1"),true);
+		assertEquals(PC.ListMap.containsKey("L1"),true);
 	}
 	
 	
@@ -112,19 +112,19 @@ class PortableControllerTest {
 		//Afegeix una llista nova
 		PortableController PC = new PortableController();
 		PC.Login("User1", "PASSWD1");
-		boolean res_AL = PC.AddList("Lista5");
+		boolean res_AL = PC.AddList("L5");
 		assertEquals(true, res_AL);
-		assertEquals(true, PC.ListMap.containsKey("Lista5"));
-		boolean res_RL = PC.RemoveList("Lista5");
+		assertEquals(true, PC.ListMap.containsKey("L5"));
+		boolean res_RL = PC.RemoveList("L5");
 		assertEquals(true, res_RL);
-		assertEquals(false, PC.ListMap.containsKey("Lista5"));
+		assertEquals(false, PC.ListMap.containsKey("L5"));
 		
 		//Intenta afegir una llista que ja existeix
-		PC = new PortableController("Lista1");
+		PC = new PortableController("L1");
 		PC.Login("User1", "PASSWD1");
-		res_AL = PC.AddList("Lista1");
+		res_AL = PC.AddList("L1");
 		assertEquals(false, res_AL);
-		assertEquals(true, PC.ListMap.containsKey("Lista1"));
+		assertEquals(true, PC.ListMap.containsKey("L1"));
 	}
 	
 	
@@ -136,16 +136,16 @@ class PortableControllerTest {
 	@Test
 	void testRemoveList() {
 		//Esborra una llista existent
-		PortableController PC = new PortableController("Lista1");
+		PortableController PC = new PortableController("L1");
 		PC.Login("User1", "PASSWD1");
 		
-		assertEquals(true, PC.ListMap.containsKey("Lista1"));
-		boolean res_RL = PC.RemoveList("Lista1");
+		assertEquals(true, PC.ListMap.containsKey("L1"));
+		boolean res_RL = PC.RemoveList("L1");
 		assertEquals(true, res_RL);
-		assertEquals(false, PC.ListMap.containsKey("Lista1"));
-		boolean res_AL = PC.AddList("Lista1");
+		assertEquals(false, PC.ListMap.containsKey("L1"));
+		boolean res_AL = PC.AddList("L1");
 		assertEquals(true, res_AL);
-		assertEquals(true, PC.ListMap.containsKey("Lista1"));
+		assertEquals(true, PC.ListMap.containsKey("L1"));
 		
 		
 		//Esborra una llista inexistent
@@ -160,7 +160,7 @@ class PortableControllerTest {
 	@Test
 	void testCheckListNameFromDatabase() {
 			PortableController PC = new PortableController();
-			assertEquals(true, PC.CheckListNameFromDatabase("Lista1"));
+			assertEquals(true, PC.CheckListNameFromDatabase("L1"));
 			assertEquals(false, PC.CheckListNameFromDatabase("Listant"));
 	}
 	
@@ -169,17 +169,17 @@ class PortableControllerTest {
 	void testCheckCodesExist() {
 		PortableController PC = new PortableController();
 		PC.Login("User1","PASSWD1");
-		String[] auxList = {"01001","01002"};
-		assertEquals(PC.CheckCodesExist("Lista1", auxList) , true);
-		String[] auxList1 = {"01011","01012"};
-		assertEquals(PC.CheckCodesExist("Lista1", auxList1) , false);
+		String[] auxList = {"L101","L102"};
+		assertEquals(PC.CheckCodesExist("L1", auxList) , true);
+		String[] auxList1 = {"L1011","L1012"};
+		assertEquals(PC.CheckCodesExist("L1", auxList1) , false);
 	}
 	
 	@Test	
 	void testCheckUserHasCodes() {
 		//user has codes
-		String[] aux = {"01001","01002"};
-		String[] auxnt = {"01010","01020"};
+		String[] aux = {"L101","L102"};
+		String[] auxnt = {"L1010","L1010"};
 		PortableController PC = new PortableController();
 		PC.Login("User1","PASSWD1");
 		assertEquals(PC.CheckIfUserHasCodes(aux),true);
