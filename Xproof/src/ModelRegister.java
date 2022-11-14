@@ -4,8 +4,12 @@ import java.io.FileWriter;   // Import the FileWriter class
 
 
 public class ModelRegister {
-String UName;
-String UPasswd;
+String UName = "unlogged";
+String UPasswd = "unlogged";
+
+	public ModelRegister() {
+	  }
+	
 	public ModelRegister(String UserName, String UserPasswd) {
 		 	UName = UserName;
 		 	UPasswd = UserPasswd;

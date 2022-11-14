@@ -12,11 +12,13 @@ public class MainScreenView {
 		}
 	}
 	public String[] LoginView(){
+		ModelRegister MR = new ModelRegister();
 		String[] def = {"",""};
 		return def;
 	}
 	
-	public String[] ReisterView(){
+	public String[] RegisterView(){
+		ModelRegister MR = new ModelRegister();
 		String[] def = {"",""};
 		return def;
 	}
