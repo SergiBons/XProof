@@ -59,7 +59,7 @@ class MainScreenViewTest {
 	    assertEquals(result,true);
 	}
 	@Test
-	void LoginOrRegister() {
+	void testLoginOrRegister() {
 		MainScreenView MSV = new MainScreenView();
 		MockUserInput MUI = new MockUserInput();
 	    InputStream stdin = System.in;
@@ -76,5 +76,21 @@ class MainScreenViewTest {
 	    res = MSV.LoginOrRegister();;
 	    System.setIn(stdin);
 	    assertEquals(res,true);
+	}
+	
+	
+	@Test
+	void testShowSelectorAlert(){
+		MainScreenView MSV = new MainScreenView();
+		MSV.ShowSelectorAlert();
+	    
+	}
+	
+	@Test
+	void testPrintAlertMessage(){
+		MainScreenView MSV = new MainScreenView();
+		String st = "Patata cocida";
+		MSV.PrintAlertMessage(st);
+	    
 	}
 }
