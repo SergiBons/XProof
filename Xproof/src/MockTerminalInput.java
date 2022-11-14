@@ -4,13 +4,15 @@ public class MockTerminalInput {
 	boolean option;
 	String lName;
 	String[] Codes;
-	public MockTerminalInput(int s) {
+	public MockTerminalInput(int s, PortableController PC) {
 		switch(s) {
 			case 0:
 				option = true;
 				lName = "L1";
 				String[] aux = {"L101","L102"};
 				Codes = aux;
+				PC.DB.AddCodes(aux);
+				
 				break;
 			case 1:
 				option = false;

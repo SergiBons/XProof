@@ -1,7 +1,9 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -42,21 +44,19 @@ public class PortableController {
 	
 	public boolean Login(String UName, String UPasswd) {
 		File f = new File("C:\\Users\\Usuario\\eclipse-workspace\\Xproof\\Materials\\BD\\Users\\"+UName+".txt");
-		if (f.exists()) {
-			try {
-					Scanner S = new Scanner(f);
-					String data = S.nextLine();
-					S.close();
+		try {
+			if (f.exists()) {
+				BufferedReader brTest = new BufferedReader(new FileReader("C:\\Users\\Usuario\\eclipse-workspace\\Xproof\\Materials\\BD\\Users\\"+UName+".txt"));
+			    String data = brTest.readLine();
+			    brTest.close();
 					if (data.equals(UPasswd)) {
 						DB.UName = UName;
 						DB.UPasswd = UPasswd;
 						return true;
 					}
-				}
-			catch(FileNotFoundException e) {
-				System.out.println("Error amb Login");
 			}
-		}
+			}catch(Exception e) {}
+		
 		return false;
 	}
 		
@@ -232,23 +232,22 @@ public class PortableController {
 	}
 	
 	public void InitUserData() {
-		File f = new File("C:\\Users\\Usuario\\eclipse-workspace\\Xproof\\Materials\\BD\\Users\\"+DB.UName+".txt");
-		try {
-			Scanner S = new Scanner(f);
-			String data = S.nextLine();
-			while(S.hasNextLine()) {
-				data = S.nextLine();
-				int EndOfName = data.indexOf("0");
-				String LName = data.substring(0, EndOfName);
-				String[] aux = {data};
+			try {
+			BufferedReader brTest = new BufferedReader(new FileReader("C:\\Users\\Usuario\\eclipse-workspace\\Xproof\\Materials\\BD\\Users\\"+DB.UName+".txt"));
+		    	String data = brTest.readLine();
+		    	while(data != null) {
+		    		data = brTest.readLine();
+			    	if(data == null)
+			    		break;
+					int EndOfName = data.indexOf("0");
+					String LName = data.substring(0, EndOfName);
+					String[] aux = {data};
+				
 				SumaCodis(LName,aux);
 					}
-			S.close();
-		}
-		catch(FileNotFoundException e) {
-			System.out.println("Error a checkIfUserHasCodes");
+		    	brTest.close();
+		    }catch(Exception e) {};
 		}
 		
 	}
 	
-}

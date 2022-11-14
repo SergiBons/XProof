@@ -1,6 +1,7 @@
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
+import java.util.Scanner;
 
 import org.junit.jupiter.api.Test;
 
@@ -34,8 +35,10 @@ class PortableControllerTest {
 		assertEquals(aux1, PC3.ListMap.get("L2"));
 		
 	}
+	//LowLevelClass
 	@Test
 	void testLogin() {
+		//Equivalent Partitions
 		//Correct Login
 		PortableController PC = new PortableController();
 		boolean CE = PC.Login("User1", "PASSWD1");
@@ -49,13 +52,21 @@ class PortableControllerTest {
 		assertEquals(CE, false);
 		assertEquals(PC.DB.UName, "unlogged");
 		assertEquals(PC.DB.UPasswd, "unlogged");
+		
+		//Limit Case and equivalent Partition testing:
+		//Limit Case
+		CE = PC.Login("", "");
+		assertEquals(CE, false);
+		
 	}
 	//SumaCodis
 	@Test
 	void testSumaCodis() {
 		//Suma codis a una llista (TOT OK)
 		PortableController PC = new PortableController("L1");
+		
 		PC.Login("User1", "PASSWD1");
+		
 		String[] testArr = {"L101","L102"};
 		boolean res_SC = PC.SumaCodis("L1", testArr);
 		assertEquals(true, res_SC);
@@ -63,28 +74,36 @@ class PortableControllerTest {
 		
 		//Suma codis a una llista nova (TOT OK)
 		PC = new PortableController();
+		
 		PC.Login("User1", "PASSWD1");
+		
 		res_SC = PC.SumaCodis("L1", testArr);
 		assertEquals(true, res_SC);
 		assertEquals(Arrays.equals(PC.ListMap.get("L1"),testArr),true);
 		
 		//(Codis Ja en User) (NOK)
 		PC = new PortableController("L1",testArr);
+		
 		PC.Login("User1", "PASSWD1");
+		
 		res_SC = PC.SumaCodis("L1", testArr);
 		assertEquals(false, res_SC);
 		assertEquals(Arrays.equals(PC.ListMap.get("L1"),testArr),true);
 		
 		//Codis a llista inexistent
 		PC = new PortableController();
+		
 		PC.Login("User1", "PASSWD1");
+		
 		res_SC = PC.SumaCodis("L7", testArr);
 		assertEquals(false, res_SC);
 
 		//codis inexistents a llista existent
 		String[] TestWrong = {"1231230","123123120"};
 		PC = new PortableController();
+		
 		PC.Login("User1", "PASSWD1");
+		
 		res_SC = PC.SumaCodis("L1", TestWrong);
 		assertEquals(false, res_SC);
 
@@ -92,7 +111,9 @@ class PortableControllerTest {
 		//Usuari sense codis a DB
 		String[] TestDiffList = {"L301","L302"};
 		PC = new PortableController();
+		
 		PC.Login("User1", "PASSWD1");
+		
 		res_SC = PC.SumaCodis("L3", TestDiffList);
 		assertEquals(false, res_SC);
 	}
@@ -107,14 +128,18 @@ class PortableControllerTest {
 		String[] testArrAux = {"L101","L102"};
 		String[] testArrRes = {"L103"};
 		PortableController PC = new PortableController("L1",testArr);
+		
 		PC.Login("User1", "PASSWD1");
+		
 		boolean res_RC = PC.RestaCodis("L1", testArrAux);
 		assertEquals(true, res_RC);
 		assertEquals(Arrays.equals(PC.ListMap.get("L1"),testArrRes),true);
 				
 		//Resta codis a una llista i l'esborra (TOT OK)
 		PC = new PortableController("L1",testArr);
+		
 		PC.Login("User1", "PASSWD1");
+		
 		res_RC = PC.RestaCodis("L1", testArr);
 		assertEquals(true, res_RC);
 		assertEquals(PC.ListMap.containsKey("L1"),false);
@@ -189,7 +214,9 @@ class PortableControllerTest {
 	@Test
 	void testCheckCodesExist() {
 		PortableController PC = new PortableController();
+		
 		PC.Login("User1","PASSWD1");
+		
 		String[] auxList = {"L101","L102"};
 		assertEquals(PC.CheckCodesExist("L1", auxList) , true);
 		String[] auxList1 = {"L1011","L1012"};
@@ -202,12 +229,16 @@ class PortableControllerTest {
 		String[] aux = {"L101","L102"};
 		String[] auxnt = {"L1010","L1010"};
 		PortableController PC = new PortableController();
+		
 		PC.Login("User1","PASSWD1");
-		assertEquals(PC.CheckIfUserHasCodes(aux),true);
+		
+;		assertEquals(PC.CheckIfUserHasCodes(aux),true);
 		
 		//user hasnt codes
 		PC = new PortableController();
+		
 		PC.Login("User1","PASSWD1");
+		
 		assertEquals(PC.CheckIfUserHasCodes(auxnt),false);
 	}
 	
@@ -216,7 +247,9 @@ class PortableControllerTest {
 		PortableController PC = new PortableController();
 		String[] aux1 = {"L101","L102"};
 		String[] aux2 = {"L201","L202"};
+		
 		PC.Login("User2", "PASSWD2");
+		
 		PC.InitUserData();
 		assertEquals(PC.ListMap.containsKey("L1"),true);
 		assertEquals(PC.ListMap.containsKey("L2"),true);

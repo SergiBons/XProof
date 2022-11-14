@@ -1,6 +1,7 @@
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.InputStream;
+import java.util.Scanner;
 
 import org.junit.jupiter.api.Test;
 
@@ -28,8 +29,10 @@ class MainScreenViewTest {
 		MockUserInput MUI = new MockUserInput();
 	    InputStream stdin = System.in; //* Comment for manual testing
 	    MUI.MockUserLRData(); //*
-	    String[] res = MSV.LoginView();
+	    Scanner scanner = new Scanner(System.in);
+	    String[] res = MSV.LoginView(scanner);
 	    String[] aux = {"User1","PASSWD1"};
+	    scanner.close();
 	    System.setIn(stdin); //*
 	    boolean result = true;;
 	    for(int i=0; i<res.length; i++){
@@ -46,7 +49,9 @@ class MainScreenViewTest {
 		MockUserInput MUI = new MockUserInput();
 	    InputStream stdin = System.in;
 	    MUI.MockUserLRData();
-	    String[] res = MSV.RegisterView();
+	    Scanner scanner = new Scanner(System.in);
+	    String[] res = MSV.RegisterView(scanner);
+	    scanner.close();
 	    String[] aux = {"User1","PASSWD1"};
 	    System.setIn(stdin);
 	    boolean result = true;;
@@ -64,7 +69,9 @@ class MainScreenViewTest {
 		MockUserInput MUI = new MockUserInput();
 	    InputStream stdin = System.in;
 	    MUI.MockUserSelectData();
-	    boolean res = MSV.LoginOrRegister();;
+	    Scanner scanner = new Scanner(System.in);
+	    boolean res = MSV.LoginOrRegister(scanner);
+	    scanner.close();
 	    System.setIn(stdin);
 	    assertEquals(res,true);
 	    
@@ -73,7 +80,9 @@ class MainScreenViewTest {
 		MUI = new MockUserInput();
 	    stdin = System.in;
 	    MUI.MockUserSelectDataMinus();
-	    res = MSV.LoginOrRegister();;
+	    scanner = new Scanner(System.in);
+	    res = MSV.LoginOrRegister(scanner);
+	    scanner.close();
 	    System.setIn(stdin);
 	    assertEquals(res,true);
 	    
@@ -81,9 +90,11 @@ class MainScreenViewTest {
 		MUI = new MockUserInput();
 	    stdin = System.in;
 	    MUI.MockUserSelectDataReg();
-	    res = MSV.LoginOrRegister();;
+	    scanner = new Scanner(System.in);
+	    res = MSV.LoginOrRegister(scanner);;
+	    scanner.close();
 	    System.setIn(stdin);
-	    assertEquals(res,true);
+	    assertEquals(res,false);
 	}
 	
 	

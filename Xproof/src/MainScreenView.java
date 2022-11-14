@@ -22,15 +22,13 @@ public class MainScreenView {
 		System.out.print("--------");
 		System.out.print("\n------------------------\n");
 	}
-	public String[] LoginView(){
-		Scanner scanner = new Scanner(System.in);
+	public String[] LoginView(Scanner scanner){
 		clearScreen();
 		System.out.print("\n----PLEASE LOG IN-------\n");
 		System.out.print("\nUserName:");
 		String UserName = scanner.nextLine();
 		System.out.print("\nPassword:");
 		String Passwd = scanner.nextLine();
-		scanner.close();
 		System.out.print("\nAttempting log in\n");
 		System.out.print(".\n");
 		System.out.print(".\n");
@@ -39,15 +37,13 @@ public class MainScreenView {
 		return  aux;
 	}
 	
-	public String[] RegisterView(){
-		Scanner scanner = new Scanner(System.in);
+	public String[] RegisterView(Scanner scanner){
 		clearScreen();
 		System.out.print("\n----PLEASE ENTER YOUR DATA-------\n");
 		System.out.print("\n UserName:");
 		String UserName = scanner.nextLine();
 		System.out.print("\n Password:");
 		String Passwd = scanner.nextLine();
-		scanner.close();
 		System.out.print("\nRegistering\n");
 		System.out.print(".\n");
 		System.out.print(".\n");
@@ -56,12 +52,10 @@ public class MainScreenView {
 		return  aux;
 	}
 	
-	public boolean LoginOrRegister(){
-		Scanner scanner = new Scanner(System.in);
+	public boolean LoginOrRegister(Scanner scanner){
 		clearScreen();
 		System.out.print("----Log in or Register as user? (L/*)-------\n");
 		String LR = scanner.nextLine();
-		scanner.close();
 		if(LR.startsWith("L"))
 			return  true;
 		else
