@@ -9,12 +9,19 @@ class MainScreenViewTest {
 	void testLoginView() {
 		MainScreenView MSV = new MainScreenView();
 		MockUserInput MUI = new MockUserInput();
-	    InputStream stdin = System.in;
-	    MUI.MockUserLRData();
+	    InputStream stdin = System.in; //* Comment for manual testing
+	    MUI.MockUserLRData(); //*
 	    String[] res = MSV.LoginView();
 	    String[] aux = {"User1","PASSWD1"};
-	    System.setIn(stdin);
-	    assertEquals(res.equals(aux),true);
+	    System.setIn(stdin); //*
+	    boolean result = true;;
+	    for(int i=0; i<res.length; i++){
+	        if(!res[i].equals(aux[i])){
+	             result = false;
+	             break;
+	        }
+	    }
+	    assertEquals(result,true);
 	}
 	@Test
 	void testRegisterView() {
@@ -25,7 +32,14 @@ class MainScreenViewTest {
 	    String[] res = MSV.RegisterView();
 	    String[] aux = {"User1","PASSWD1"};
 	    System.setIn(stdin);
-	    assertEquals(res.equals(aux),true);
+	    boolean result = true;;
+	    for(int i=0; i<res.length; i++){
+	        if(!res[i].equals(aux[i])){
+	             result = false;
+	             break;
+	        }
+	    }
+	    assertEquals(result,true);
 	}
 	@Test
 	void LoginOrRegister() {
