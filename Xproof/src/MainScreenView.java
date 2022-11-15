@@ -24,14 +24,14 @@ public class MainScreenView {
 	
 	
 	public void PrintAlertMessage(String Message) {
-		try{TimeUnit.SECONDS.sleep(1);
-		}catch(Exception e) {}
+		
 		System.out.print("\n------------------------\n");
 		System.out.print("--------");
 		System.out.print(Message);
 		System.out.print("--------");
 		System.out.print("\n------------------------\n");
-
+		try{TimeUnit.SECONDS.sleep(1);
+		}catch(Exception e) {}
 	}
 	public String[] LoginView(Scanner scanner){
 		try{TimeUnit.SECONDS.sleep(1);
@@ -91,7 +91,8 @@ public class MainScreenView {
 		PrintAlertMessage("0:Exit Program\n");
 		PrintAlertMessage("1:Log Out\n");
 		PrintAlertMessage("2:Interact With Terminal\n");
-		
+		try{TimeUnit.SECONDS.sleep(1);
+		}catch(Exception e) {}
 		
 		
 	}
