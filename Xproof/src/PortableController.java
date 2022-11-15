@@ -156,6 +156,8 @@ public class PortableController {
 	}	
 	
 	public boolean AddList(String ListName) {
+		if  (ListName == "")
+			return false;
 		if (ListMap.containsKey(ListName))
 			return false;
 		else {
@@ -174,7 +176,8 @@ public class PortableController {
 	}
 	
 	public boolean CheckCodesExist(String list, String[] codis ) {
-		
+		if(codis.length==0)
+			return false;
 		File f = new File("C:\\Users\\Usuario\\eclipse-workspace\\Xproof\\Materials\\BD\\Lists\\"+list+".txt");
 		int coincidenceCounter = 0;
 		for (int i = 0; i<codis.length;i++)
