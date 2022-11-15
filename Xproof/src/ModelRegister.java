@@ -36,7 +36,7 @@ String UPasswd = "unlogged";
 	
 	
 	public String CheckPasswdRestrictions() {
-		if (UPasswd.length() > 5)
+		if (UPasswd.length() >= 5)
 			return "CORRECT";
 		else 
 			return "PASSWD TOO SHORT";

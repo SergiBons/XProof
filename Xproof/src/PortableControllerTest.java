@@ -127,6 +127,7 @@ class PortableControllerTest {
 		String[] testArr = {"L101","L102","L103"};
 		String[] testArrAux = {"L101","L102"};
 		String[] testArrRes = {"L103"};
+		String[] testArrMinus = {"L105","L106"};
 		PortableController PC = new PortableController("L1",testArr);
 		
 		PC.Login("User1", "PASSWD1");
@@ -147,6 +148,12 @@ class PortableControllerTest {
 		//(User no te codis a la llista) (NOK)
 		PC = new PortableController("L1");
 		res_RC = PC.RestaCodis("L1", testArr);
+		assertEquals(false, res_RC);
+		assertEquals(PC.ListMap.containsKey("L1"),true);
+		
+		//(User te codis a la llista pero no els que volem borrar) (NOK)
+		PC = new PortableController("L1",testArr);
+		res_RC = PC.RestaCodis("L1", testArrMinus);
 		assertEquals(false, res_RC);
 		assertEquals(PC.ListMap.containsKey("L1"),true);
 	}
