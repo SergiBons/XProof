@@ -54,7 +54,7 @@ String UPasswd = "unlogged";
 	    }
 	    try {
 	        FileWriter myWriter = new FileWriter("C:\\Users\\Usuario\\eclipse-workspace\\Xproof\\Materials\\BD\\Users\\"+UName+".txt");
-	        myWriter.write(UPasswd);
+	        myWriter.write(UPasswd+"\n");
 	        myWriter.close();
 	      } catch (IOException e) {
 	        CE = "CAN NOT WRITE TO FILE";

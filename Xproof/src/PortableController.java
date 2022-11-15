@@ -53,6 +53,10 @@ public class PortableController {
 						DB.UPasswd = UPasswd;
 						return true;
 					}
+					else
+					{
+						return false;
+					}
 			}catch(Exception e) {}
 		
 		return false;
@@ -236,14 +240,13 @@ public class PortableController {
 			try {
 			BufferedReader brTest = new BufferedReader(new FileReader("C:\\Users\\Usuario\\eclipse-workspace\\Xproof\\Materials\\BD\\Users\\"+DB.UName+".txt"));
 		    	String data = brTest.readLine();
-		    	while(data != null) {
+		    	while(true) {
 		    		data = brTest.readLine();
 			    	if(data == null)
 			    		break;
 					int EndOfName = data.indexOf("0");
 					String LName = data.substring(0, EndOfName);
 					String[] aux = {data};
-				
 				SumaCodis(LName,aux);
 					}
 		    	brTest.close();

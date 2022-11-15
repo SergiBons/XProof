@@ -7,12 +7,13 @@ import java.io.InputStream;
 import org.junit.jupiter.api.Test;
 
 class MainControllerTest {
-
-	//@Test
-	//void testManual() {
-	//	MainController MC = new MainController();
-	//	MC.main(null);
-	//}
+	
+	@Test
+	void testManual() {
+		MainController MC = new MainController();
+		MC.main(null);
+	}
+	/*
 	@Test
 	void testLogReg() {
 		MainController MC = new MainController();
@@ -200,6 +201,5 @@ class MainControllerTest {
 		MC.main(null);
 		System.setIn(stdin);
 	}
-
-
+	*/
 }

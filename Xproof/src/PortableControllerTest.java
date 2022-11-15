@@ -53,6 +53,12 @@ class PortableControllerTest {
 		assertEquals(PC.DB.UName, "unlogged");
 		assertEquals(PC.DB.UPasswd, "unlogged");
 		
+		//Wrong passwd
+		PC = new PortableController();
+		CE = PC.Login("User25", "PAS");
+		assertEquals(CE, false);
+		assertEquals(PC.DB.UName, "unlogged");
+		assertEquals(PC.DB.UPasswd, "unlogged");
 		//Limit Case and equivalent Partition testing:
 		//Limit Case
 		CE = PC.Login("", "");
@@ -305,6 +311,13 @@ class PortableControllerTest {
 		assertEquals(PC.ListMap.containsKey("L2"),true);
 		assertEquals(Arrays.equals(PC.ListMap.get("L1"),aux1),true);
 		assertEquals(Arrays.equals(PC.ListMap.get("L2"),aux2),true);
+		
+		PC = new PortableController();
+		PC.InitUserData();
+		
+		PC = new PortableController();
+		PC.Login("User25", "PASSWD5");
+		PC.InitUserData();
 		
 	}
 	
