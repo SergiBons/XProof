@@ -8,6 +8,9 @@ public class MockUserInput {
 	public void MockUserLWData() {
 	    System.setIn(new ByteArrayInputStream("Usernt\nPASSWDnt\n".getBytes()));
 	}
+	public void MockUserLEData() {
+	    System.setIn(new ByteArrayInputStream("\n\n".getBytes()));
+	}
 	public void MockUserSelectData() {
 		System.setIn(new ByteArrayInputStream("L\n".getBytes()));
 	}
