@@ -145,7 +145,7 @@ public class PortableController {
 	
 	
 	
-	//Subfuncions
+	//Subfuncions (lowLevelClasses)
 	
 	public boolean CheckListNameFromDatabase(String name) {
 		File f = new File("C:\\Users\\Usuario\\eclipse-workspace\\Xproof\\Materials\\BD\\Lists\\"+name+".txt");

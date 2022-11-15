@@ -155,6 +155,7 @@ class PortableControllerTest {
 	//AddList
 	@Test
 	void testAddList() {
+		//Equivalent Partitions
 		//Afegeix una llista nova
 		PortableController PC = new PortableController();
 		PC.Login("User1", "PASSWD1");
@@ -171,6 +172,13 @@ class PortableControllerTest {
 		res_AL = PC.AddList("L1");
 		assertEquals(false, res_AL);
 		assertEquals(true, PC.ListMap.containsKey("L1"));
+		
+		//LimitCase
+		PC = new PortableController("L1");
+		PC.Login("User1", "PASSWD1");
+		res_AL = PC.AddList("");
+		assertEquals(false, res_AL);
+		
 	}
 	
 	
@@ -181,6 +189,7 @@ class PortableControllerTest {
 	//RemoveList
 	@Test
 	void testRemoveList() {
+		//Equivalent Partitions
 		//Esborra una llista existent
 		PortableController PC = new PortableController("L1");
 		PC.Login("User1", "PASSWD1");
@@ -199,6 +208,11 @@ class PortableControllerTest {
 		assertEquals(false, PC.ListMap.containsKey("Listant"));
 		res_RL = PC.RemoveList("Listant");
 		assertEquals(false, res_RL);
+		
+		//LimitCase
+		PC = new PortableController();
+		res_RL = PC.RemoveList("");
+		assertEquals(false, res_RL);
 	}
 	
 	
@@ -206,8 +220,14 @@ class PortableControllerTest {
 	@Test
 	void testCheckListNameFromDatabase() {
 			PortableController PC = new PortableController();
+			//Equivalent Partition
+			//Lista Correcta
 			assertEquals(true, PC.CheckListNameFromDatabase("L1"));
+			//Lista Incorrecta
 			assertEquals(false, PC.CheckListNameFromDatabase("Listant"));
+			
+			//LimitCase
+			assertEquals(false, PC.CheckListNameFromDatabase(""));
 	}
 	
 	//CheckCodesExist
@@ -216,18 +236,28 @@ class PortableControllerTest {
 		PortableController PC = new PortableController();
 		
 		PC.Login("User1","PASSWD1");
-		
+		//Equivalent partition
+		//Codes exist
 		String[] auxList = {"L101","L102"};
 		assertEquals(PC.CheckCodesExist("L1", auxList) , true);
+		//Codes don't exist
 		String[] auxList1 = {"L1011","L1012"};
 		assertEquals(PC.CheckCodesExist("L1", auxList1) , false);
+		//Limit case
+		//empty list
+		String[] auxList2 = {};
+		assertEquals(PC.CheckCodesExist("L1", auxList2) , false);
+		//empty string
+		assertEquals(PC.CheckCodesExist("", auxList1) , false);
 	}
 	
 	@Test	
 	void testCheckUserHasCodes() {
+		//Equivalent Partitions
 		//user has codes
 		String[] aux = {"L101","L102"};
 		String[] auxnt = {"L1010","L1010"};
+		String[] auxnt1 = {};
 		PortableController PC = new PortableController();
 		
 		PC.Login("User1","PASSWD1");
@@ -240,8 +270,16 @@ class PortableControllerTest {
 		PC.Login("User1","PASSWD1");
 		
 		assertEquals(PC.CheckIfUserHasCodes(auxnt),false);
+		
+		//Limit case
+		//empty list
+		PC = new PortableController();
+		
+		PC.Login("User1","PASSWD1");
+		
+		assertEquals(PC.CheckIfUserHasCodes(auxnt1),false);
 	}
-	
+	//Not Low level class
 	@Test
 	void testInitUserData() {
 		PortableController PC = new PortableController();
