@@ -5,12 +5,16 @@ public class MainScreenView {
 	public void UpdateListView(HashMap<String, String[]> ListMap) {
 		clearScreen();
 		System.out.print("------Welcome-------\n");
+		int i = 0;
 		for (String NomLlista :ListMap.keySet()) {
 			System.out.print("--------------------\n");
 			System.out.print(NomLlista);
 			System.out.print("\nPoints: ");
 			System.out.print(ListMap.get(NomLlista).length);
 			System.out.print("\n--------------------\n");
+			i++;
+			if(i==10)
+				break;
 		}
 	}
 	

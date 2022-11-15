@@ -6,21 +6,58 @@ import java.util.Scanner;
 import org.junit.jupiter.api.Test;
 
 class MainScreenViewTest {
-	//Not Low-Level by definition
 	@Test
 	void testUpdateListView() {
+		//n_max=9
+		//loop Testing
+		//1
 		String[] aux = {"L101","L102"};
 		PortableController PC = new PortableController("L1",aux);
 		MainScreenView MSV = new MainScreenView();
 		MSV.UpdateListView(PC.ListMap);
 		
-		
+		//2
 		String[] listNames = {"L1","Lista2"};
 		String[] aux1 = {"L201","L202"};
 		String[][] ListCL = {aux, aux1};
 		PC = new PortableController(listNames,ListCL);
 		MSV = new MainScreenView();
 		MSV.UpdateListView(PC.ListMap);
+		
+		//0
+		String[] listNamesnt = {};
+		PC = new PortableController(listNamesnt,ListCL);
+		MSV = new MainScreenView();
+		MSV.UpdateListView(PC.ListMap);
+		
+		//5
+		String[] listNamesM = {"l1","l2","l3","l4","l5"};
+		String[][] ListCLM = {aux, aux, aux, aux, aux};
+		PC = new PortableController(listNamesM,ListCLM);
+		MSV = new MainScreenView();
+		MSV.UpdateListView(PC.ListMap);
+		
+		//8
+		String[] listNamesMb = {"l1","l2","l3","l4","l5","l6","l7","l8"};
+		String[][] ListCLMb = {aux, aux, aux, aux, aux, aux, aux, aux};
+		PC = new PortableController(listNamesMb,ListCLMb);
+		MSV = new MainScreenView();
+		MSV.UpdateListView(PC.ListMap);
+		
+		//9
+		String[] listNamesMa = {"l1","l2","l3","l4","l5","l6","l7","l8","l9"};
+		String[][] ListCLMa = {aux, aux, aux, aux, aux, aux, aux, aux, aux};
+		PC = new PortableController(listNamesMa,ListCLMa);
+		MSV = new MainScreenView();
+		MSV.UpdateListView(PC.ListMap);
+		
+		//10
+		String[] listNamesMax = {"l1","l2","l3","l4","l5","l6","l7","l8","l9","l10"};
+		String[][] ListCLMax = {aux, aux, aux, aux, aux, aux, aux, aux, aux, aux};
+		PC = new PortableController(listNamesMax,ListCLMax);
+		MSV = new MainScreenView();
+		MSV.UpdateListView(PC.ListMap);
+		
 	}
 	
 	
