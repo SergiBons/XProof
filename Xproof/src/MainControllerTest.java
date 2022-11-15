@@ -38,6 +38,22 @@ class MainControllerTest {
 	    assertEquals(PC.DB.UName.equals("Usernew"),true);
 	    assertEquals(PC.DB.UPasswd.equals("PASSWDN"),true);
 	    
+	    //register incorrect
+	    PC = new PortableController();
+		stdin = System.in;
+		MUI = new MockUserInput();
+	    MUI.MockUserLogReg(4);
+	    MC.SetScanner();
+	    PC = MC.Log_Reg(MSV, PC, RDB, err);
+	    MC.CloseScanner();
+	    f = new File("C:\\Users\\Usuario\\eclipse-workspace\\Xproof\\Materials\\BD\\Users\\Usernew.txt");
+		if (f.exists()) {
+			System.gc();
+			f.delete();
+		}
+		System.setIn(stdin);
+	    
+	    
 		//register incorrect then correct
 	    PC = new PortableController();
 		stdin = System.in;
@@ -67,6 +83,25 @@ class MainControllerTest {
 	    assertEquals(PC.DB.UName.equals("User1"),true);
 	    assertEquals(PC.DB.UPasswd.equals("PASSWD1"),true);
 	    
+	    //register incorrect (already exists) then login to end statement
+	    PC = new PortableController();
+		stdin = System.in;
+		MUI = new MockUserInput();
+	    MUI.MockUserLogReg(5);
+	    MC.SetScanner();
+	    PC = MC.Log_Reg(MSV, PC, RDB, err);
+	    MC.CloseScanner();
+	    System.setIn(stdin);
+	    
+	    //register incorrect (passwordtoolong) then login to end statement
+	    PC = new PortableController();
+		stdin = System.in;
+		MUI = new MockUserInput();
+	    MUI.MockUserLogReg(6);
+	    MC.SetScanner();
+	    PC = MC.Log_Reg(MSV, PC, RDB, err);
+	    MC.CloseScanner();
+	    System.setIn(stdin);
 	    
 	}
 	
@@ -127,6 +162,16 @@ class MainControllerTest {
 	    MC.CloseScanner();
 	    System.setIn(stdin);
 	    assertEquals(ans,2);
+	    
+	    //default Case
+		stdin = System.in;
+		MUI = new MockUserInput();
+	    MUI.MockUserSelect("5\n0");
+	    MC.SetScanner();
+	    ans = MC.SelectorPick(PC, MSV);
+	    MC.CloseScanner();
+	    System.setIn(stdin);
+	    assertEquals(ans,10);
 	}
 	
 	@Test

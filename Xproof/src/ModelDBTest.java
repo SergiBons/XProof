@@ -78,6 +78,15 @@ class ModelDBTest {
 		assertEquals(DB.CheckListName("L1"),true);
 		assertEquals(CE,false);
 		CE = DB.AddCodes(aux);
+
+		
+		//File doesn't exist
+		DB = new ModelDB("","PASSWD1");
+		String[] aux1 ={"L501","L502"};
+		f = new File("C:\\Users\\Usuario\\eclipse-workspace\\Xproof\\Materials\\BD\\Users\\"+DB.UName+".txt");
+		CE = DB.DeleteCodes(aux1);
+		assertEquals(DB.CheckListName("L1"),true);
+		assertEquals(CE,false);
 		
 		
 	}

@@ -45,7 +45,6 @@ public class PortableController {
 	public boolean Login(String UName, String UPasswd) {
 		File f = new File("C:\\Users\\Usuario\\eclipse-workspace\\Xproof\\Materials\\BD\\Users\\"+UName+".txt");
 		try {
-			if (f.exists()) {
 				BufferedReader brTest = new BufferedReader(new FileReader("C:\\Users\\Usuario\\eclipse-workspace\\Xproof\\Materials\\BD\\Users\\"+UName+".txt"));
 			    String data = brTest.readLine();
 			    brTest.close();
@@ -54,7 +53,6 @@ public class PortableController {
 						DB.UPasswd = UPasswd;
 						return true;
 					}
-			}
 			}catch(Exception e) {}
 		
 		return false;
@@ -224,7 +222,7 @@ public class PortableController {
 				}
 				S.close();
 			}
-			catch(FileNotFoundException e) {
+			catch(Exception e) {
 				System.out.println("Error a checkIfUserHasCodes");
 			}
 		}

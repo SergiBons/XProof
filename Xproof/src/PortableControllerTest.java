@@ -268,8 +268,7 @@ class PortableControllerTest {
 		PortableController PC = new PortableController();
 		
 		PC.Login("User1","PASSWD1");
-		
-;		assertEquals(PC.CheckIfUserHasCodes(aux),true);
+				assertEquals(PC.CheckIfUserHasCodes(aux),true);
 		
 		//user hasnt codes
 		PC = new PortableController();
@@ -285,6 +284,12 @@ class PortableControllerTest {
 		PC.Login("User1","PASSWD1");
 		
 		assertEquals(PC.CheckIfUserHasCodes(auxnt1),true);
+		
+		//emptyUser
+		PC = new PortableController();
+		
+		PC.Login("","PASSWD1");
+		assertEquals(PC.CheckIfUserHasCodes(aux),false);
 	}
 	//Not Low level class
 	@Test

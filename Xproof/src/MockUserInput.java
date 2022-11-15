@@ -35,7 +35,13 @@ public class MockUserInput {
 				System.setIn(new ByteArrayInputStream("L\nUser1\nPASSWD1\n".getBytes()));
 				break;
 			case 4:
-				System.setIn(new ByteArrayInputStream("l\nUsernt\nPASSWDnt\nL\nUser1\nPASSWD1\n".getBytes()));
+				System.setIn(new ByteArrayInputStream("r\nPrettyImSureUsernameIsWayTooLong\nPASSWDnt\nL\nUser1\nPASSWD1\n".getBytes()));
+				break;
+			case 5:
+				System.setIn(new ByteArrayInputStream("r\nUser1\nPASSWD1\nL\nUser1\nPASSWD1\n".getBytes()));
+				break;
+			case 6:
+				System.setIn(new ByteArrayInputStream("r\nUser1\nNT\nL\nUser1\nPASSWD1\n".getBytes()));
 				break;
 			}
 		}
@@ -50,8 +56,5 @@ public class MockUserInput {
 	}
 	public void MockUserFull2() {
 		System.setIn(new ByteArrayInputStream(("l\nUser1\nPASSWD1\n2\n0\n").getBytes()));
-	}
-	public void MockUserFull3() {
-		System.setIn(new ByteArrayInputStream(("\n").getBytes()));
 	}
 }

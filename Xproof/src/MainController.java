@@ -38,7 +38,7 @@ public class MainController {
 	{
 		boolean logged = false;
 		while (!logged) {
-if(MSV.LoginOrRegister(scanner)){
+			if(MSV.LoginOrRegister(scanner)){
 				String[] UserData = MSV.LoginView(scanner);
 				 if (PC.Login(UserData[0],UserData[1]))
 				 {
